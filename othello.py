@@ -26,19 +26,19 @@ def create_othello_board(size = 8):
         [0,0,0,0,0,0,0,0],
         [0,0,0,2,0,0,0,0],
         [0,0,0,0,2,2,1,0],
-        [0,0,0,2,1,0,0,0],
+        [0,0,0,2,2,0,0,0],
         [0,0,0,1,2,0,0,0],
-        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,1,0,0],
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0]
         ]
 
     # board = [[1,2,3],[4,5,6],[7,8,9]]
     return board
+
 def board_print(board):
     for i in board :
         print(i)
-
 
 def move_pointer(piece_pointer,direction,step_length=1):#piece_pointer 落子位置，direction 移动方向，step_length 每次移动步长
     piece_move_pointer = piece_pointer.copy()
@@ -110,7 +110,7 @@ def move_direction(board,piece_pointer):
         move_direction_list.remove("north-east")
     return move_direction_list
 
-def move_piece(board,piece_pointer,player_id = 1):
+def move_piece(board,piece_pointer,player_id):
     if player_id == 1:
         opponent_id = 2
     elif player_id == 2:
@@ -123,12 +123,6 @@ def move_piece(board,piece_pointer,player_id = 1):
         piece_id = board[piece_check_pointer[1]][piece_check_pointer[0]]
         around_piece_list.append(piece_id)
 
-    if opponent_id in around_piece_list:
-        print("Can be moved!")
-    else:
-        print("Can not be moved!")
-    # print(around_piece_list)
-    
     # 找到可以翻转子的方向
     move_piece_direction_list = []
     direct_num = around_piece_list.count(opponent_id)
@@ -138,7 +132,6 @@ def move_piece(board,piece_pointer,player_id = 1):
         around_piece_list.remove(opponent_id)
         move_direction_list.remove(move_direction_list[direct_index])
     # print(move_piece_direction_list)
-
     # 找出每个方向可以反转的棋子
     can_reverse_piece_pointer_list = []
     for i in move_piece_direction_list:
@@ -154,40 +147,41 @@ def move_piece(board,piece_pointer,player_id = 1):
         if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player_id:
             for n in piece_check_pointer_2_list:
                 can_reverse_piece_pointer_list.append(n)
-    can_reverse_piece_pointer_list.insert(0,piece_pointer)
-    return can_reverse_piece_pointer_list
+    if can_reverse_piece_pointer_list != []:
+        can_reverse_piece_pointer_list.insert(0,piece_pointer)
+    return can_reverse_piece_pointer_list #需要翻转的棋子列表
 
-def reverse_piece(board,piece_pointer):
-    if board[piece_pointer[1]][piece_pointer[0]] == 1:
-        board[piece_pointer[1]][piece_pointer[0]]=2
+
+def reverse_piece(board,piece_pointer,player_id):#根据坐标翻转棋子
+    board[piece_pointer[1]][piece_pointer[0]] = player_id 
+
+def one_reversing(board,piece_pointer,player_id):# 一次落子
+    # can_reverse_piece_pointer_list = ["start"]
+    #print(piece_pointer) 
+    can_reverse_piece_pointer_list = move_piece(board,piece_pointer,player_id = player_id)
+    if can_reverse_piece_pointer_list != []:
+        # print(can_reverse_piece_pointer_list)
+        for i in can_reverse_piece_pointer_list:
+            reverse_piece(board,i,player_id = player_id)
+        can_reverse_piece_pointer_list.remove(piece_pointer)
+        # board_print(board)
+        # print(can_reverse_piece_pointer_list)
+        for n in can_reverse_piece_pointer_list:
+            one_reversing(board,n,player_id)
+
+def one_play(board,piece_pointer,player_id):
+    can_reverse_piece_pointer_list = move_piece(board,piece_pointer,player_id = player_id)
+    if can_reverse_piece_pointer_list != []:
+        one_reversing(board,piece_pointer,player_id)
     else:
-        board[piece_pointer[1]][piece_pointer[0]]=1
-    return board
+        print("can not be moved")
 
 def main():
     board = create_othello_board()
     board_print(board)
+    player_id = 1
     piece_pointer = [3,2]
-    can_reverse_piece_pointer_list = move_piece(board,piece_pointer)
-    print(can_reverse_piece_pointer_list)
-    for i in can_reverse_piece_pointer_list:
-        reverse_piece(board,i)
+    one_play(board,piece_pointer,player_id = player_id)
+    print("完成一次落子".center(20,"—"))
     board_print(board)
-
 main()
-
-
-
-# print(b)
-# piece_A = 1
-# piece_B = 2
-# piece = piece_B
-# x = 1
-# y = 0
-# pointer = [x,y]
-# b[y][x] = 2
-# i = 1
-# while b[y+1][x] != piece and b[y+1][x] != 0:
-#     b[y+1][x] = 2
-#     y = y+1
-# print(b)
