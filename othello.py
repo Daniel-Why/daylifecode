@@ -25,7 +25,7 @@ def create_othello_board(size = 8):
     board = [
         [0,0,0,0,0,0,0,0],
         [0,0,0,2,0,0,0,0],
-        [0,0,0,0,2,1,0,0],
+        [0,0,0,0,2,2,1,0],
         [0,0,0,2,1,0,0,0],
         [0,0,0,1,2,0,0,0],
         [0,0,0,0,0,0,0,0],
@@ -127,7 +127,7 @@ def move_piece(board,piece_pointer,player_id = 1):
         print("Can be moved!")
     else:
         print("Can not be moved!")
-    print(around_piece_list)
+    # print(around_piece_list)
     
     # 找到可以翻转子的方向
     move_piece_direction_list = []
@@ -137,35 +137,44 @@ def move_piece(board,piece_pointer,player_id = 1):
         move_piece_direction_list.append(move_direction_list[direct_index])
         around_piece_list.remove(opponent_id)
         move_direction_list.remove(move_direction_list[direct_index])
-    print(move_piece_direction_list)
+    # print(move_piece_direction_list)
 
-    #找出每个方向可以反转的棋子
+    # 找出每个方向可以反转的棋子
     can_reverse_piece_pointer_list = []
     for i in move_piece_direction_list:
         step_len = 1
         piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
-        print(piece_check_pointer_2)
-        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player_id: 
+        piece_check_pointer_2_list = []
+        # print(i,piece_check_pointer_2)
+        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player_id: 
             piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
-            if board[piece_pointer[1]][piece_pointer[0]] == opponent_id:
-                can_reverse_piece_pointer_list.append(piece_check_pointer_2)
+            if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == opponent_id:
+                piece_check_pointer_2_list.append(piece_check_pointer_2)
             step_len = step_len + 1
+        if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player_id:
+            for n in piece_check_pointer_2_list:
+                can_reverse_piece_pointer_list.append(n)
+    can_reverse_piece_pointer_list.insert(0,piece_pointer)
+    return can_reverse_piece_pointer_list
 
-    print(can_reverse_piece_pointer_list)
-
-
-
-
-
+def reverse_piece(board,piece_pointer):
+    if board[piece_pointer[1]][piece_pointer[0]] == 1:
+        board[piece_pointer[1]][piece_pointer[0]]=2
+    else:
+        board[piece_pointer[1]][piece_pointer[0]]=1
+    return board
 
 def main():
     board = create_othello_board()
     board_print(board)
     piece_pointer = [3,2]
-    move_piece(board,piece_pointer)
+    can_reverse_piece_pointer_list = move_piece(board,piece_pointer)
+    print(can_reverse_piece_pointer_list)
+    for i in can_reverse_piece_pointer_list:
+        reverse_piece(board,i)
+    board_print(board)
 
 main()
-    
 
 
 
