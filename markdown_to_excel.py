@@ -84,43 +84,37 @@ def lines_between_tag_reading(lines,tag_index_list):#读取列表指定行之间
         t_pointer += 1
     return between_tag_text_list
 
+#def main():
+#    os.chdir('D://Personal//test//test2')
+#    file_route_list = all_file_route(format='.md')
+#    #print(file_route_list)
+#    n = 0
+#    create_excel()
+#    new_workbook,new_worksheet = read_excel()
+#    for i in file_route_list:
+#        print(n+1)
+#        lines = read_lines(i)
+#        tool_name = lines[0]
+#        tag_index_list,tag_list =lines_tag_reading(lines,tag='#')
+#        #print(tag_index_list)
+#        #print(tag_list)
+#        #tag_list.insert(0,'###toolname')
+#        between_tag_text_list = lines_between_tag_reading(lines,tag_index_list)
+#        between_tag_text_list.insert(0,tool_name)
+#        write_excel(new_worksheet,tag_list,sort_by_column=True)
+#        write_excel(new_worksheet,between_tag_text_list,start_row=n+1,start_column=0,sort_by_column=True)
+#        n += 1
+#    save_excel(new_workbook)
+
 def main():
     os.chdir('D://Personal//test//test2')
     file_route_list = all_file_route(format='.md')
     #print(file_route_list)
-    n = 0
     create_excel()
     new_workbook,new_worksheet = read_excel()
-    for i in file_route_list:
-        print(n+1)
-        lines = read_lines(i)
-        tool_name = lines[0]
-        tag_index_list,tag_list =lines_tag_reading(lines,tag='- ')
-        #print(tag_index_list)
-        #print(tag_list)
-        #tag_list.insert(0,'###toolname')
-        between_tag_text_list = lines_between_tag_reading(lines,tag_index_list)
-        between_tag_text_list.insert(0,tool_name)
-        write_excel(new_worksheet,tag_list,sort_by_column=True)
-        write_excel(new_worksheet,between_tag_text_list,start_row=n+1,start_column=0,sort_by_column=True)
-        n += 1
+    lines = read_lines("tool_list.md")
+    tag_index_list,tag_list =lines_tag_reading(lines,tag='#')
+    write_excel(new_worksheet,tag_list,sort_by_column=True)
     save_excel(new_workbook)
-
-# def main():
-#     os.chdir('D://Personal//test//test2')
-#     file_route_list = all_file_route(format='.md')
-#     #print(file_route_list)
-#     n = 0
-#     create_excel()
-#     new_workbook,new_worksheet = read_excel()
-#     for i in file_route_list:
-#         print(n+1)
-#         lines = read_lines(i)
-#         write_excel(new_worksheet,lines,sort_by_column=True)
-#        
-#         n += 1
-#     save_excel(new_workbook)
-
-
 main()
 
