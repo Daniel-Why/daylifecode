@@ -12,18 +12,18 @@ def create_player():
 # 创建棋盘
 def create_othello_board(size = 8):
     # 自动生成满足尺寸的棋盘
-    if size % 2 == 0:
-        board= []
-        board_row = size *[0]
-        for i in range(0,size):
-            board_row_copy = board_row.copy()
-            board.append(board_row_copy)
-        board[size//2-1][size//2-1]=2
-        board[size//2][size//2]=2
-        board[size//2-1][size//2]=1
-        board[size//2][size//2-1]=1
-    else:
-        print("棋盘尺寸应该为偶数！")
+    #if size % 2 == 0:
+    #    board= []
+    #    board_row = size *[0]
+    #    for i in range(0,size):
+    #        board_row_copy = board_row.copy()
+    #        board.append(board_row_copy)
+    #    board[size//2-1][size//2-1]=2
+    #    board[size//2][size//2]=2
+    #    board[size//2-1][size//2]=1
+    #    board[size//2][size//2-1]=1
+    #else:
+    #    print("棋盘尺寸应该为偶数！")
 
     #board = [
     #    [0,0,0,0,0,0,0,0],
@@ -37,6 +37,14 @@ def create_othello_board(size = 8):
     #    ]
 
     # board = [[1,2,3],[4,5,6],[7,8,9]]
+    # 玩家2，请输入落子的坐标，以","分割：2,0 报错。
+    board =[
+        [2, 1, 0, 0],
+        [2, 1, 1, 0],
+        [2, 1, 2, 0],
+        [0, 1, 0, 0]
+        ]
+
     return board
 
 # 打印棋盘
@@ -74,19 +82,19 @@ def move_direction(board,piece_pointer):
         #设定边界
     board_len = len(board)
     move_direction_list = ["north","north-east","east","south-east","south","south-west","west","north-west"]
-    if piece_pointer[1] == 0 and piece_pointer[0] != 0 and piece_pointer[0] != board_len:
+    if piece_pointer[1] == 0 and piece_pointer[0] != 0 and piece_pointer[0] != board_len-1:
         move_direction_list.remove("north-west")
         move_direction_list.remove("north")
         move_direction_list.remove("north-east")
-    if piece_pointer[1] == board_len and piece_pointer[0] != 0 and piece_pointer[0] != board_len:
+    if piece_pointer[1] == board_len-1 and piece_pointer[0] != 0 and piece_pointer[0] != board_len-1:
         move_direction_list.remove("south-west")
         move_direction_list.remove("south")
         move_direction_list.remove("south-east")
-    if piece_pointer[0] == 0 and piece_pointer[1] != 0 and piece_pointer[1] != board_len:
+    if piece_pointer[0] == 0 and piece_pointer[1] != 0 and piece_pointer[1] != board_len-1:
         move_direction_list.remove("north-west")
         move_direction_list.remove("west")
         move_direction_list.remove("south-west")
-    if piece_pointer[0] == board_len and piece_pointer[1] != 0 and piece_pointer[1] != board_len:
+    if piece_pointer[0] == board_len-1 and piece_pointer[1] != 0 and piece_pointer[1] != board_len-1:
         move_direction_list.remove("south-east")
         move_direction_list.remove("east")
         move_direction_list.remove("north-east")
@@ -96,19 +104,19 @@ def move_direction(board,piece_pointer):
         move_direction_list.remove("north")
         move_direction_list.remove("west") 
         move_direction_list.remove("south-west") 
-    if piece_pointer == [board_len,0]:
+    if piece_pointer == [board_len-1,0]:
         move_direction_list.remove("north-west")
         move_direction_list.remove("north-east")
         move_direction_list.remove("north")
         move_direction_list.remove("east") 
         move_direction_list.remove("south-east") 
-    if piece_pointer == [0,board_len]:
+    if piece_pointer == [0,board_len-1]:
         move_direction_list.remove("south-west")
         move_direction_list.remove("south-east")
         move_direction_list.remove("south")
         move_direction_list.remove("west") 
         move_direction_list.remove("north-west") 
-    if piece_pointer == [board_len,board_len]:
+    if piece_pointer == [board_len-1,board_len-1]:
         move_direction_list.remove("south-west")
         move_direction_list.remove("south-east")
         move_direction_list.remove("south")
@@ -125,6 +133,7 @@ def move_piece(board,piece_pointer,player_id):
     move_direction_list = move_direction(board,piece_pointer)
     # 判定落子周围是否有对手的子
     around_piece_list = []
+    # print(move_direction_list)
     for i in move_direction_list:
         piece_check_pointer = move_pointer(piece_pointer,i)
         piece_id = board[piece_check_pointer[1]][piece_check_pointer[0]]
