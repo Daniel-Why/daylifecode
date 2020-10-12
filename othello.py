@@ -37,12 +37,12 @@ def create_othello_board(size = 8):
     #    ]
 
     # board = [[1,2,3],[4,5,6],[7,8,9]]
-    # 玩家2，请输入落子的坐标，以","分割：2,0 报错。
+    # 玩家1，落子(3,3)后翻转错误，全部2都翻转为1。
     board =[
-        [2, 1, 0, 0],
-        [2, 1, 1, 0],
-        [2, 1, 2, 0],
-        [0, 1, 0, 0]
+            [2, 2, 2, 1],
+            [2, 2, 1, 0],
+            [2, 2, 2, 0],
+            [0, 1, 2, 0]
         ]
 
     return board
@@ -154,9 +154,14 @@ def move_piece(board,piece_pointer,player_id):
         step_len = 1
         piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
         piece_check_pointer_2_list = []
-        # print(i,piece_check_pointer_2)
-        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player_id: 
+        print(i,piece_check_pointer_2)
+        # print(board[piece_check_pointer_2[1]][piece_check_pointer_2[0]])
+        # print(player_id)
+        # print(len(board)-1)
+        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player_id and piece_check_pointer_2[1] < len(board) and piece_check_pointer_2[0] < len(board): 
             piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
+            # print(i,piece_check_pointer_2)
+            # print(piece_check_pointer_2)
             if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == opponent_id:
                 piece_check_pointer_2_list.append(piece_check_pointer_2)
             step_len = step_len + 1
@@ -165,6 +170,7 @@ def move_piece(board,piece_pointer,player_id):
                 can_reverse_piece_pointer_list.append(n)
     if can_reverse_piece_pointer_list != []:
         can_reverse_piece_pointer_list.insert(0,piece_pointer)
+    print(can_reverse_piece_pointer_list)
     return can_reverse_piece_pointer_list #需要翻转的棋子列表
 
 # 根据坐标翻转一枚棋子
@@ -181,7 +187,9 @@ def one_reversing(board,piece_pointer,player_id):# 一次落子
         for i in can_reverse_piece_pointer_list:
             reverse_piece(board,i,player_id = player_id)
         can_reverse_piece_pointer_list.remove(piece_pointer)
+
         # board_print(board)
+        
         # print(can_reverse_piece_pointer_list)
         for n in can_reverse_piece_pointer_list:
             one_reversing(board,n,player_id)
@@ -197,6 +205,7 @@ def one_play(board,player_id):
         board_print(board)
         one_play_status[1] = "done"       
     else:
+        # print(can_reverse_piece_pointer_list)
         print("不能在这里落子")
         print("请重新落子".center(20,"—"))
         board_print(board)
