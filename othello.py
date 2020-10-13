@@ -12,18 +12,18 @@ def create_player():
 # 创建棋盘
 def create_othello_board(size = 8):
     # 自动生成满足尺寸的棋盘
-    #if size % 2 == 0:
-    #    board= []
-    #    board_row = size *[0]
-    #    for i in range(0,size):
-    #        board_row_copy = board_row.copy()
-    #        board.append(board_row_copy)
-    #    board[size//2-1][size//2-1]=2
-    #    board[size//2][size//2]=2
-    #    board[size//2-1][size//2]=1
-    #    board[size//2][size//2-1]=1
-    #else:
-    #    print("棋盘尺寸应该为偶数！")
+    # if size % 2 == 0:
+    #     board= []
+    #     board_row = size *[0]
+    #     for i in range(0,size):
+    #         board_row_copy = board_row.copy()
+    #         board.append(board_row_copy)
+    #     board[size//2-1][size//2-1]=2
+    #     board[size//2][size//2]=2
+    #     board[size//2-1][size//2]=1
+    #     board[size//2][size//2-1]=1
+    # else:
+    #     print("棋盘尺寸应该为偶数！")
 
     #board = [
     #    [0,0,0,0,0,0,0,0],
@@ -37,11 +37,13 @@ def create_othello_board(size = 8):
     #    ]
 
     # board = [[1,2,3],[4,5,6],[7,8,9]]
+    
+    # 1无法落子，导致对局结束
     board =[
-            [2, 2, 2, 2],
-            [2, 2, 2, 2],
-            [2, 2, 2, 2],
-            [0, 2, 1, 2]
+            [2, 2, 2, 1],
+            [2, 2, 2, 1],
+            [2, 2, 1, 1],
+            [2, 1, 0, 0]
         ]
 
     return board
@@ -123,6 +125,10 @@ def move_direction(board,piece_pointer):
         move_direction_list.remove("north-east")
     return move_direction_list
 
+# 检查棋子是否超过边界：
+def boundary_check(board,piece_pointer):
+    return piece_pointer[1] < len(board) and piece_pointer[0] < len(board) and piece_pointer[1] >=0 and piece_pointer[0] >=0
+
 # 落子后，四周可以翻转的棋子坐标
 def move_piece(board,piece_pointer,player_id):
     if player_id == 1:
@@ -153,17 +159,17 @@ def move_piece(board,piece_pointer,player_id):
         step_len = 1
         piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
         piece_check_pointer_2_list = []
-        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player_id and piece_check_pointer_2[1] < len(board) and piece_check_pointer_2[0] < len(board) and piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0: 
+        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player_id and boundary_check(board,piece_check_pointer_2) : # piece_check_pointer_2[1] < len(board) and piece_check_pointer_2[0] < len(board) and piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0: 
             piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
             if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == opponent_id:
                 piece_check_pointer_2_list.append(piece_check_pointer_2)
             step_len = step_len + 1
-            piece_check_pointer_3 = move_pointer(piece_pointer,i,step_length=step_len)#用piece_check_pointer_3 假设检验 piece_pointer 移动后，piece_check_pointer_2 是否可能超出范围
-            if piece_check_pointer_3[1] < len(board) and piece_check_pointer_3[0] < len(board) and piece_check_pointer_3[1] >=0 and piece_check_pointer_3[0] >=0: #边界判断
+            piece_check_pointer_3 = move_pointer(piece_pointer,i,step_length=step_len) # 用piece_check_pointer_3 假设检验 piece_pointer 移动后，piece_check_pointer_2 是否可能超出范围
+            if  boundary_check(board,piece_check_pointer_3): # piece_check_pointer_3[1] < len(board) and piece_check_pointer_3[0] < len(board) and piece_check_pointer_3[1] >=0 and piece_check_pointer_3[0] >=0: #边界判断
                 continue
             else:
                 break
-        if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player_id and piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0:
+        if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player_id and boundary_check(board,piece_check_pointer_2): # piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0:
             for n in piece_check_pointer_2_list:
                 can_reverse_piece_pointer_list.append(n)
     if can_reverse_piece_pointer_list != []:
@@ -205,15 +211,14 @@ def one_play(board,player_id):
     return one_play_status 
 
 # 交换玩家
-def play_change(one_play_status):
-    play_id_list = [1,2]
-    if one_play_status[1] == "done":
-        play_id_list.remove(one_play_status[0])
-        next_play_id = play_id_list[0]
-    elif one_play_status[1] == "undo":
-        next_play_id = one_play_status[0]
-    print("请玩家 {} 落子".format(next_play_id))       
-    return next_play_id
+def player_change(one_player_status):
+    player_id_list = [1,2]
+    if one_player_status[1] == "done":
+        player_id_list.remove(one_player_status[0])
+        next_player_id = player_id_list[0]
+    elif one_player_status[1] == "undo":
+        next_player_id = one_player_status[0]       
+    return next_player_id
 
 # 输入落子的坐标
 def move_input():
@@ -222,20 +227,32 @@ def move_input():
     piece_pointer.append(x)
     piece_pointer.append(y)
     return piece_pointer
-# 开始游戏
-def start_game(board):
-    player_id = 1
-    print("玩家 {} 先手".format(player_id))
-    while piece_count(board,0) !=0 :
-        one_play_status = one_play(board,player_id)
-        player_id = play_change(one_play_status)
-    print("对局结束".center(20,"—"))
+
 # 计算棋盘上的棋子
 def piece_count(board,piece_id):
     piece_num = 0
     for i in board:
         piece_num = piece_num + i.count(piece_id)
     return piece_num
+
+# 查看是否有可以走的棋
+def board_check(board,player_id):
+    check_board = board.copy()
+    check_piece = [0,0]
+    # 用循环遍历棋盘上每个点
+    # 确定每个点是否可以落子
+    # 若无法落子代表棋局结束，输出对应结果
+
+
+# 开始游戏
+def start_game(board):
+    player_id = 1
+    print("玩家 {} 先手".format(player_id))
+    while piece_count(board,0) !=0 :
+        one_player_status = one_play(board,player_id)
+        player_id = player_change(one_player_status)
+        print("请玩家 {} 落子".format(player_id))
+    print("对局结束".center(20,"—"))
 
 def main():
     board = create_othello_board(size=4)
