@@ -1,5 +1,6 @@
 #批量生成 filename 中的文件
 import os
+os.chdir('D://YZYImage')
 aa = []
 with open("filename.txt", "r", encoding='UTF-8') as f:
     for line in f.readlines():
@@ -11,7 +12,6 @@ for i in range(0, l):
     fname1 = aa[i].splitlines(False)
     fname = ''.join(fname1)
     fileName = fname
-    pic = '{}\\pic'.format(fileName)
+    # pic = '{}\\pic'.format(fileName)
     os.mkdir(fileName)
-    os.mkdir(pic)
-    
+    # os.mkdir(pic)
