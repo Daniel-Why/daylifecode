@@ -38,11 +38,11 @@ def create_othello_board(size = 8):
 
     # board = [[1,2,3],[4,5,6],[7,8,9]]
     
-    # 1无法落子，导致对局结束
+    # 可以落子，判断错误
     board =[
             [2, 2, 2, 1],
-            [2, 2, 2, 1],
             [2, 2, 1, 1],
+            [2, 2, 2, 1],
             [2, 1, 0, 0]
         ]
 
@@ -237,16 +237,39 @@ def piece_count(board,piece_id):
 
 # 查看是否有可以走的棋
 def board_check(board,player_id):
-    check_board = board.copy()
-    check_piece = [0,0]
     # 用循环遍历棋盘上每个点
+    check_board = board.copy()
+    check_piece_list = []
+    check_piece = [0,0]
+    y = 0
+    for i in check_board:
+        check_piece[1] = y
+        # print("y=",y)
+        x = 0
+        for n in i:
+            check_piece[0] = x
+            check_piece_list.append(check_piece.copy()) # 若 append check_piece，则列表会变为 [check_piece,check_piece,...,check_piece]，若check_piece 变化，列表中的所有值会跟着边，则会出现全部重复的项。
+            x = x+1
+        y = y + 1
+    # print(check_piece_list)
+    can_move_piece_check_list=[]
     # 确定每个点是否可以落子
+    for m in check_piece_list:
+        can_reverse_piece_pointer_check_list = move_piece(check_board,m,player_id)
+        if can_reverse_piece_pointer_check_list != [] and check_board[m[1]][m[0]] == 0:
+            can_reverse_piece_pointer_check_list.append(m.copy())
+    # print(can_reverse_piece_pointer_check_list)
     # 若无法落子代表棋局结束，输出对应结果
+    if can_reverse_piece_pointer_check_list != []:
+        print("可以落子的地方：",can_reverse_piece_pointer_check_list)
+    elif can_reverse_piece_pointer_check_list == []:
+        print("无法落子，交换选手！")
 
 
 # 开始游戏
 def start_game(board):
     player_id = 1
+    board_check(board,player_id)
     print("玩家 {} 先手".format(player_id))
     while piece_count(board,0) !=0 :
         one_player_status = one_play(board,player_id)
