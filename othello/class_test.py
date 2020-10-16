@@ -47,7 +47,39 @@ class player:
         self.name = name
         self.player_id = player_id
 
+
+class test2:
+    def __init__(self):
+        print("我是 test2")
+        self.me = "apple"
+        print(self.me)
+
+    def shenfa(self,a,b):
+        c = a * b
+        return c
+
+class test(test2):
+    def __init__(self,a,b):
+        d = self.jiafa(a,b)
+        shenfa = test2()
+        e = shenfa.shenfa(a,b)
+        print("a+b=",d)
+        print("a*b=",e)
+
+    def jiafa(self,a,b):
+        c = a + b
+        return c
+
+
 a = board(4)
 a.board_print()
 player01 = player("daniel",1)
 print(player01.player_id)
+b=a.board.copy()
+print(b)
+
+test(2,3)
+a = test2()
+print("a.me=",a.me)
+a.me = "coconut"
+print("new_a.me=",a.me)
