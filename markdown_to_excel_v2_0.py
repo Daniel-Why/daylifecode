@@ -1,4 +1,4 @@
-# 常用的excel、文件夹等操作的函数
+# 获取文件夹及子文件夹内所有 .md 文件，并根据 .md 文件段落导入 excel,需要md 内容大纲都相同。按一个文件一个文件写入。
 import xlwt
 import xlrd
 from xlutils.copy import copy
@@ -87,3 +87,62 @@ def lines_between_tag_reading(lines,tag_index_list):#读取列表指定行之间
         between_tag_text_list.append(md_text)
         t_pointer += 1
     return between_tag_text_list
+
+# def main():
+#     os.chdir('D://YZYImage//test')
+#     file_route_list = all_file_route(format='.md')
+#     #print(file_route_list)
+#     n = 0
+#     create_excel()
+#     new_workbook,new_worksheet = read_excel()
+#     for i in file_route_list:
+#        print(n+1)
+#        lines = read_lines(i)
+#        tool_name = lines[0]
+#        tag_index_list,tag_list =lines_tag_reading(lines,tag='##')
+#        # print(tag_index_list)
+#        # print(tag_list)
+#        # tag_list.insert(0,'###toolname')
+#        between_tag_text_list = lines_between_tag_reading(lines,tag_index_list)
+#        between_tag_text_list.insert(0,tool_name)
+#        write_excel(new_worksheet,tag_list,sort_by_column=False)
+#        write_excel(new_worksheet,between_tag_text_list,start_row=n+1,start_column=0,sort_by_column=False)
+#        n += 1
+#     save_excel(new_workbook)
+
+# def main():
+#     os.chdir('D://Personal//test//test2')
+#     file_route_list = all_file_route(format='.md')
+#     #print(file_route_list)
+#     create_excel()
+#     new_workbook,new_worksheet = read_excel()
+#     lines = read_lines("tool_list.md")
+#     tag_index_list,tag_list =lines_tag_reading(lines,tag='#')
+#     write_excel(new_worksheet,tag_list,sort_by_column=True)
+#     save_excel(new_workbook)
+
+def main():
+    os.chdir('D://YZYImage_full//md//operating_systems')
+    file_route_list = all_file_route(format='.md')
+    #print(file_route_list)
+    n = 0
+    create_excel()
+    new_workbook,new_worksheet = read_excel()
+    for i in file_route_list:
+        lines = read_lines(i)
+        lines.pop()
+        tool_name = lines[0]
+        tag_index_list,tag_list =lines_tag_reading(lines,tag='#')
+        # print(tag_index_list)
+        # print(tag_list)
+        tag_list.insert(0,'###toolname')
+        between_tag_text_list = lines_between_tag_reading(lines,tag_index_list)
+        between_tag_text_list.insert(0,tool_name)
+        # print(between_tag_text_list)
+        write_excel(new_worksheet,tag_list,sort_by_column=False)
+        write_excel(new_worksheet,between_tag_text_list,start_row=n+1,start_column=0,sort_by_column=False)
+        print("\r 已完成文件数：{}。".format(n+1),end='')
+        n += 1
+    save_excel(new_workbook)
+main()
+

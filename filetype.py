@@ -1,6 +1,6 @@
 #查看文件夹内所有文件类型
 import os
-def scan_file_list(file_dir): #读取目标文件夹内所有 .md 文件
+def scan_file_list(file_dir): #读取目标文件夹内所有文件
     aa=[] 
     for root, dirs, files in os.walk(file_dir):
         for file in files:

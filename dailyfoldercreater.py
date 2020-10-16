@@ -1,4 +1,4 @@
-import os
+import os #每天生成一个以日期命名的文件夹，并将之前的空文件夹删除。
 import datetime
 os.chdir('C:\\Users\\Daniel.Why\\Desktop\\temp')
 f_path = '.'
