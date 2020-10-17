@@ -152,10 +152,10 @@ def boundary_check(board,piece_pointer):
     return piece_pointer[1] < len(board) and piece_pointer[0] < len(board) and piece_pointer[1] >=0 and piece_pointer[0] >=0
 
 # 落子后，四周可以翻转的棋子坐标
-def move_piece(board,piece_pointer,player_id):
-    if player_id == 1:
+def move_piece(board,piece_pointer,player):
+    if player.player_id == 1:
         opponent_id = 2
-    elif player_id == 2:
+    elif player.player_id == 2:
         opponent_id = 1
     move_direction_list = move_direction(board,piece_pointer)
     # 判定落子周围是否有对手的子
@@ -181,7 +181,7 @@ def move_piece(board,piece_pointer,player_id):
         step_len = 1
         piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
         piece_check_pointer_2_list = []
-        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player_id and boundary_check(board,piece_check_pointer_2) : # piece_check_pointer_2[1] < len(board) and piece_check_pointer_2[0] < len(board) and piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0: 
+        while board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != 0 and board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] != player.player_id and boundary_check(board,piece_check_pointer_2) : # piece_check_pointer_2[1] < len(board) and piece_check_pointer_2[0] < len(board) and piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0: 
             piece_check_pointer_2 = move_pointer(piece_pointer,i,step_length=step_len)
             if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == opponent_id:
                 piece_check_pointer_2_list.append(piece_check_pointer_2)
@@ -191,7 +191,7 @@ def move_piece(board,piece_pointer,player_id):
                 continue
             else:
                 break
-        if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player_id and boundary_check(board,piece_check_pointer_2): # piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0:
+        if board[piece_check_pointer_2[1]][piece_check_pointer_2[0]] == player.player_id and boundary_check(board,piece_check_pointer_2): # piece_check_pointer_2[1] >=0 and piece_check_pointer_2[0] >=0:
             for n in piece_check_pointer_2_list:
                 can_reverse_piece_pointer_list.append(n)
     if can_reverse_piece_pointer_list != []:
@@ -199,20 +199,20 @@ def move_piece(board,piece_pointer,player_id):
     return can_reverse_piece_pointer_list #需要翻转的棋子列表
 
 # 根据坐标翻转一枚棋子
-def reverse_piece(board,piece_pointer,player_id):
-    board[piece_pointer[1]][piece_pointer[0]] = player_id 
+def reverse_piece(board,piece_pointer,player):
+    board[piece_pointer[1]][piece_pointer[0]] = play.player_id 
 
 # 一次落子后，翻转所有可以翻转的棋子
-def one_reversing(board,piece_pointer,player_id):# 一次落子
+def one_reversing(board,piece_pointer,player):# 一次落子
     # can_reverse_piece_pointer_list = ["start"]
-    can_reverse_piece_pointer_list = move_piece(board,piece_pointer,player_id = player_id)
+    can_reverse_piece_pointer_list = move_piece(board,piece_pointer,player)
     if can_reverse_piece_pointer_list != []:
         for i in can_reverse_piece_pointer_list:
-            reverse_piece(board,i,player_id = player_id)
+            reverse_piece(board,i,player)
         can_reverse_piece_pointer_list.remove(piece_pointer)
 
         for n in can_reverse_piece_pointer_list: # -----[2,3]
-            one_reversing(board,n,player_id)
+            one_reversing(board,n,player)
 
 # 玩家完成一次落子
 def one_play(board,player):
@@ -239,10 +239,10 @@ def player_change(now_player,player_01,player_02):
 
 
 # 计算棋盘上的棋子
-def piece_count(board,player):
+def piece_count(board,piece_id):
     piece_num = 0
     for i in board:
-        piece_num = piece_num + i.count(player.player_id)
+        piece_num = piece_num + i.count(piece_id)
     return piece_num
 
 # 查看是否有可以走的棋
