@@ -10,17 +10,19 @@ def create_player():
     player_dict={"player_01":1,"player_02":2}
     return player_dict
 
-class player:
+class Player:
     name = ""
     player_id = 0
-    def __init__(self,name,player_id,player_type = "human-being"):
+    def __init__(self,name,player_id,player_type = "human"):
         self.name = name
         self.player_id = player_id
         self.player_type = player_type
+        self.player_status = "undo"
+
 
     # 输入落子的坐标
     def move_input(self,can_move_piece_check_list = []):
-        if self.player_type == "human-bing":
+        if self.player_type == "human":
             piece_pointer = []
             x,y = map(int,input('请输入落子的坐标，以\",\"分割：').split(","))
             piece_pointer.append(x)
@@ -213,44 +215,38 @@ def one_reversing(board,piece_pointer,player_id):# 一次落子
             one_reversing(board,n,player_id)
 
 # 玩家完成一次落子
-def one_play(board,player_id):
-    one_player_status = [player_id,"undo"]
+def one_play(board,player):
     piece_pointer=move_input()
-    can_reverse_piece_pointer_list = move_piece(board,piece_pointer,player_id = player_id)
+    can_reverse_piece_pointer_list = move_piece(board,piece_pointer,player = player)
     if can_reverse_piece_pointer_list != [] and board[piece_pointer[1]][piece_pointer[0]] == 0:
-        one_reversing(board,piece_pointer,player_id)
+        one_reversing(board,piece_pointer,player)
         print("完成一次落子".center(20,"—"))
-        board_print(board)
-        one_player_status[1] = "done"       
+        board_print(board)    
     else:
         # print(can_reverse_piece_pointer_list)
         print("不能在这里落子")
         print("请重新落子".center(20,"—"))
         board_print(board)
-        # one_play(board,player_id)
-    return one_player_status 
+        one_play(board,player)
 
 # 交换玩家
-def player_change(one_player_status):
-    player_id_list = [1,2]
-    next_player_id = 0
-    if one_player_status[1] == "done":
-        player_id_list.remove(one_player_status[0])
-        next_player_id = player_id_list[0]
-    elif one_player_status[1] == "undo":
-        next_player_id = one_player_status[0]       
-    return next_player_id
+def player_change(now_player,player_01,player_02):
+    if now_player.player_id == player_01.player_id:
+        next_player = player_02
+    elif now_player.player_id == player_02.player_id:
+        next_player = player_01    
+    return next_player
 
 
 # 计算棋盘上的棋子
-def piece_count(board,piece_id):
+def piece_count(board,player):
     piece_num = 0
     for i in board:
-        piece_num = piece_num + i.count(piece_id)
+        piece_num = piece_num + i.count(player.player_id)
     return piece_num
 
 # 查看是否有可以走的棋
-def board_check(board,player_id):
+def board_check(board,player):
     # 用循环遍历棋盘上每个点
     check_board = board.copy()
     check_piece_list = []
@@ -269,41 +265,43 @@ def board_check(board,player_id):
     can_move_piece_check_list=[]
     # 确定每个点是否可以落子
     for m in check_piece_list:
-        can_reverse_piece_pointer_check_list = move_piece(check_board,m,player_id)
+        can_reverse_piece_pointer_check_list = move_piece(check_board,m,player)
         if can_reverse_piece_pointer_check_list != [] and check_board[m[1]][m[0]] == 0:
              can_move_piece_check_list.append(m.copy())
-    # print(can_move_piece_check_list)
-    # 若无法落子代表棋局结束，输出对应结果
-    one_player_status = [player_id,""]
-    if can_move_piece_check_list != []:
-        print("可以落子的地方：",can_move_piece_check_list)
-        one_player_status[1] = "undo"
-    elif can_move_piece_check_list == []:
-        #print("无法落子，交换选手！")
-        one_player_status[1] = "done"
-    return one_player_status
+    return can_move_piece_check_list
 
     
 
 
 # 开始游戏
 def start_game(board):
-    a = player("Daniel",1,"AI")
-    b = player("Monna",2,"AI")
-    now_player = a
-    # print("玩家 {} 先手".format(now_player.player_id))
+    player_01 = Player("Daniel",1,"human")
+    player_02 = Player("Monna",2,"human")
     overcheck = 0
-    while piece_count(board,0) !=0 and overcheck != 2:
-        print("请玩家 {} 落子".format(player_id))
-        one_player_status = board_check(board,player_id)
-        if one_player_status[1] == "undo":
-            one_player_status = one_play(board,player_id)
-            overcheck = 0
-        elif one_player_status[1] == "done":
+    now_player = player_01
+    while piece_count(board,0) != 0 and overcheck != 2:
+        print("请玩家 {} 落子".format(now_player.player_id))
+        can_move_piece_check_list = board_check(board,now_player)
+        if can_move_piece_check_list != []:
+            print("可以落子的地方：",can_move_piece_check_list)
+            one_play(board,now_player)
+        elif can_move_piece_check_list == []:
             print("无法落子，交换选手！")
-            overcheck = overcheck + 1
-        player_id = player_change(one_player_status)    
+        now_player = player_change(now_player,player_01,player_02)
+        
+
+
+#        if one_player_status[1] == "undo":
+#            one_player_status = one_play(board,player_id)
+#            overcheck = 0
+#        elif one_player_status[1] == "done":
+#            print("无法落子，交换选手！")
+#            overcheck = overcheck + 1
+#        player_id = player_change(one_player_status)    
     print("对局结束".center(20,"—"))
+
+        
+
 
 def main():
     board = create_othello_board(size=6)
