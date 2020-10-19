@@ -1,6 +1,7 @@
 #批量生成复制并重命名文件
 import os
 import shutil
+os.chdir('C://Users//Daniel.Why//Desktop//temp//2020-10-17')
 aa = []
 with open("filename.txt", "r", encoding='UTF-8') as f:
     for line in f.readlines():

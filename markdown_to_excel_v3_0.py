@@ -5,7 +5,7 @@ from xlutils.copy import copy
 import os
 import common_use_function as cf
 def main():
-    os.chdir('D://YZYImage_full//md//operating_systems')
+    os.chdir('D://YZYImage_full//md//docker-images-202008')
     file_route_list = cf.all_file_route(format='.md')
     tool_name_list = []
     orgin_tag_list = []
