@@ -15,7 +15,7 @@ class FirstScreen(GridLayout):
         # layout = GridLayout(cols=1)
         lab_game_name = Label(text=label_game_name,markup=True,font_size='25sp',size_hint_y=None,height=100)
         lab_creator = Label(text=label_creator,markup=True,font_size='20sp',size_hint_y=None,height=100)
-        img_logo = Image(source='.\\othello\\static\\othello.png',size_hint_y=None,height=350)
+        img_logo = Image(source='.\\othello\\othello_v3\\static\\othello.png',size_hint_y=None,height=350)
         lab_start_button=Button(text='START',size_hint_y=None,height=10)
 
         self.add_widget(lab_game_name)
