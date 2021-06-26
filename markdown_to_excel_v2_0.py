@@ -122,7 +122,7 @@ def lines_between_tag_reading(lines,tag_index_list):#读取列表指定行之间
 #     save_excel(new_workbook)
 
 def main():
-    os.chdir('D://YZYImage_full//md//operating_systems')
+    os.chdir('D://YZYTool')
     file_route_list = all_file_route(format='.md')
     #print(file_route_list)
     n = 0

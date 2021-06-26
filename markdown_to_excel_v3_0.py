@@ -5,13 +5,13 @@ from xlutils.copy import copy
 import os
 import common_use_function as cf
 def main():
-    os.chdir('D://YZYImage_full//md//docker-images-202008')
+    os.chdir('D://Personal//test')
     file_route_list = cf.all_file_route(format='.md')
     tool_name_list = []
     orgin_tag_list = []
     for i in file_route_list:
         lines = cf.read_lines(i)
-        lines.pop()
+        # lines.pop()
         tag = "#"
         tag_index_list,tag_list =cf.lines_tag_reading(lines,tag=tag)
         tool_name_list.append(tag_list[0])
@@ -51,4 +51,5 @@ def main():
         print("\r —————— 已完成条目数：{}。————————".format(n+1),end='')
         n += 1
     cf.save_excel(new_workbook)
+
 main()
