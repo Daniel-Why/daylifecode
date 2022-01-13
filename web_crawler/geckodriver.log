@@ -1,0 +1,282 @@
+1632466314197	geckodriver	INFO	Listening on 127.0.0.1:49274
+1632466316588	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileSfrT3H"
+1632466318484	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileSfrT3H\\search.json.mozlz4", (void 0)))
+1632466321230	Marionette	INFO	Listening on port 49282
+1632466321432	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1632466554482	Marionette	INFO	Stopped listening on port 49282
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1632466645752	geckodriver	INFO	Listening on 127.0.0.1:62599
+1632466648240	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofilenmTbXY"
+1632466650112	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofilenmTbXY\\search.json.mozlz4", (void 0)))
+1632466653073	Marionette	INFO	Listening on port 57241
+1632466653601	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1632466724212	Marionette	INFO	Stopped listening on port 57241
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1632466729738	geckodriver	INFO	Listening on 127.0.0.1:62302
+1632466732230	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileMc6tNC"
+1632466734037	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileMc6tNC\\search.json.mozlz4", (void 0)))
+1632466736667	Marionette	INFO	Listening on port 55236
+1632466737070	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://10.10.10.31/static/js/app.141cb6b7060558c9c469.js, line 1: ReferenceError: webpackJsonp is not defined
+1632467014268	Marionette	INFO	Stopped listening on port 55236
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+1632467096777	geckodriver	INFO	Listening on 127.0.0.1:64233
+1632467099275	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileKbrLGx"
+1632467101105	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileKbrLGx\\search.json.mozlz4", (void 0)))
+1632467104124	Marionette	INFO	Listening on port 64241
+1632467104629	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.xctf.org.cn/static/js/code.photoswipe-3.0.5.js, line 5008: unreachable code after return statement
+JavaScript warning: https://www.xctf.org.cn/static/js/code.photoswipe-3.0.5.js, line 5030: unreachable code after return statement
+JavaScript warning: https://www.xctf.org.cn/static/js/code.photoswipe-3.0.5.js, line 5048: unreachable code after return statement
+console.error: "Tried to send a 'target-destroyed-form' event on an already destroyed actor 'watcher'"
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x690023,name=PNecko::Msg_RemoveRequestContext) Channel closing: too late to send/recv, messages will be lost
+
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1632618247117	Marionette	INFO	Stopped listening on port 64241
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+1632712336058	geckodriver	INFO	Listening on 127.0.0.1:56594
+1632712338548	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileWb5R3g"
+1632712340935	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileWb5R3g\\search.json.mozlz4", (void 0)))
+1632712344091	Marionette	INFO	Listening on port 58176
+1632712344313	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1632712528907	Marionette	INFO	Stopped listening on port 58176
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1633836625935	geckodriver	INFO	Listening on 127.0.0.1:59521
+1633836628267	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofilecw3TUF"
+1633836631132	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofilecw3TUF\\search.json.mozlz4", (void 0)))
+1633836634582	Marionette	INFO	Listening on port 59534
+1633836634706	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1633836776528	Marionette	INFO	Stopped listening on port 59534
+JavaScript error: resource:///modules/Interactions.jsm, line 230: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+1633923692809	geckodriver	INFO	Listening on 127.0.0.1:65107
+1633923695155	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofile7JNBWF"
+1633923697197	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofile7JNBWF\\search.json.mozlz4", (void 0)))
+1633923700232	Marionette	INFO	Listening on port 65121
+1633923700544	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Drawing to a destination rect smaller than the viewport rect. (This warning will only be given once)
+JavaScript warning: http://uniquemachine.org/fingerprint/depth_texture/webgl-nuke-vendor-prefix.js, line 16: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: http://uniquemachine.org/fingerprint/depth_texture/webgl-nuke-vendor-prefix.js, line 16: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: generateMipmap: Tex image TEXTURE_2D level 0 is incurring lazy initialization.
+JavaScript warning: , line 0: WebGL warning: generateMipmap: Tex image TEXTURE_2D level 0 is incurring lazy initialization.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: After reporting 32, no further warnings will be reported for this WebGL context.
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Drawing to a destination rect smaller than the viewport rect. (This warning will only be given once)
+JavaScript warning: http://uniquemachine.org/fingerprint/depth_texture/webgl-nuke-vendor-prefix.js, line 16: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: http://uniquemachine.org/fingerprint/depth_texture/webgl-nuke-vendor-prefix.js, line 16: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: generateMipmap: Tex image TEXTURE_2D level 0 is incurring lazy initialization.
+JavaScript warning: , line 0: WebGL warning: generateMipmap: Tex image TEXTURE_2D level 0 is incurring lazy initialization.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: WebGL warning: drawArraysInstanced: Using format enabled by implicitly enabled extension: EXT_float_blend. For maximal portability enable it explicitly.
+JavaScript warning: , line 0: After reporting 32, no further warnings will be reported for this WebGL context.
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:819:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:704:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:819:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:704:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:819:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:704:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:819:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:704:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:819:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:704:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:819:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:704:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+JavaScript error: http://10.10.10.31/static/js/app.141cb6b7060558c9c469.js, line 54: Error: Request failed with status code 403
+1633931312104	Marionette	INFO	Stopped listening on port 65121
+JavaScript error: resource:///modules/Interactions.jsm, line 201: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1634195255973	geckodriver	INFO	Listening on 127.0.0.1:54886
+1634195258133	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofilebtYnmT"
+1634195260696	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofilebtYnmT\\search.json.mozlz4", (void 0)))
+1634195264804	Marionette	INFO	Listening on port 49925
+1634195265135	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1634196347516	Marionette	INFO	Stopped listening on port 49925
+JavaScript error: resource:///modules/Interactions.jsm, line 201: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1634202639364	geckodriver	INFO	Listening on 127.0.0.1:51605
+1634202641733	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileoOYRca"
+1634202645131	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileoOYRca\\search.json.mozlz4", (void 0)))
+1634202650148	Marionette	INFO	Listening on port 51329
+1634202650278	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.warn: "IGNORED REDUX ACTION:" "AUTOCOMPLETE_CLEAR"
+1634203861150	Marionette	INFO	Stopped listening on port 51329
+JavaScript error: resource:///modules/Interactions.jsm, line 201: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1637136102429	geckodriver	INFO	Listening on 127.0.0.1:61183
+1637136104765	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileql52lH"
+1637136106670	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileql52lH\\search.json.mozlz4", (void 0)))
+1637136109584	Marionette	INFO	Listening on port 61192
+1637136109705	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+SourceActor threw an exception: [Exception... "Failed to open input source 'javascript:void(0);'"  nsresult: "0x80040111 (NS_ERROR_NOT_AVAILABLE)"  location: "JS frame :: resource://devtools/shared/DevToolsUtils.js :: mainThreadFetch/< :: line 670"  data: yes]
+Stack: mainThreadFetch/<@resource://devtools/shared/DevToolsUtils.js:670:15
+mainThreadFetch@resource://devtools/shared/DevToolsUtils.js:516:10
+_fetchURLContents@resource://devtools/server/actors/utils/sources-manager.js:442:22
+urlContents@resource://devtools/server/actors/utils/sources-manager.js:406:17
+_resurrectSource@resource://devtools/server/actors/thread.js:2091:35
+addAllSources@resource://devtools/server/actors/thread.js:1446:14
+watch@resource://devtools/server/actors/resources/sources.js:52:17
+watchResources@resource://devtools/server/actors/resources/index.js:242:19
+_watchTargetResources@resource://devtools/server/actors/targets/target-actor-mixin.js:175:24
+addWatcherDataEntry@resource://devtools/server/actors/targets/target-actor-mixin.js:52:20
+_addWatcherDataEntry@resource://devtools/server/connectors/js-window-actor/DevToolsFrameChild.jsm:582:24
+receiveMessage@resource://devtools/server/connectors/js-window-actor/DevToolsFrameChild.jsm:496:21
+Line: 670, column: 0
+console.error: ({})
+JavaScript error: resource://devtools/shared/DevToolsUtils.js, line 670: NS_ERROR_NOT_AVAILABLE: Failed to open input source 'javascript:void(0);'
+1637136197512	Marionette	INFO	Stopped listening on port 61192
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1637138466692	geckodriver	INFO	Listening on 127.0.0.1:51142
+1637138469161	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileYPNEtg"
+1637138471079	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileYPNEtg\\search.json.mozlz4", (void 0)))
+1637138473775	Marionette	INFO	Listening on port 51152
+1637138473993	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1637138512267	Marionette	INFO	Stopped listening on port 51152
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1637139110530	geckodriver	INFO	Listening on 127.0.0.1:51687
+1637139112925	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileeBMRXb"
+1637139114898	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Daniel.Why\\AppData\\Local\\Temp\\rust_mozprofileeBMRXb\\search.json.mozlz4", (void 0)))
+1637139117796	Marionette	INFO	Listening on port 51697
+1637139118254	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource:///modules/UrlbarInput.jsm, line 2952: TypeError: event.target.closest is not a function
+1637139123309	Marionette	INFO	Stopped listening on port 51697
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
