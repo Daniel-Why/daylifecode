@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+ 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+        <title>verify插件demo</title>
+        <link rel="stylesheet" type="text/css" href="css/verify.css">
+
+        <!-- 坐标检测 script-->
+        <script type="text/javascript" src="js/common_util.js"></script>
+        <script type="text/javascript">
+            var getCoordInDocumentExample = function(){
+                var coords = document.getElementById("mpanel4");
+                var mouse_info = "";
+                coords.onmousemove = function(e){
+                    var pointer = getCoordInDocument(e);
+                    var timestamp = new Date().getTime()
+                    var coord = document.getElementById("coord");
+                    mouse_info += pointer.x+", "+pointer.y+","+timestamp+"|"; 
+                    coord.innerHTML = mouse_info;
+                }
+            }
+     
+            window.onload = function(){
+                getCoordInDocumentExample();
+            };
+        </script>
+    </head>
+ 
+    <body>
+
+        <div><img src="images/1.jpg" class="org_pic" alt="captcha_orgin" height="200px" width="400px"></div>
+    	<!-- 滑动验证码 -->
+    	<h3>滑动验证码</h3>
+        <div id="mpanel4" style="margin-top:50px;" >
+        </div>
+        <br />
+        <!--  -->
+        <div id = "result" ></div>
+        <!--  -->
+        <div id="coord" style="width:500px;border:2px solid #9C89CB;border-radius: 5px 5px 5px 5px;">&nbsp;</div>
+        
+        <script type="text/javascript" src="js/jquery.min.js" ></script>
+        <script type="text/javascript" src="js/verify.js" ></script>
+
+
+
+        <!--<script type="text/javascript" src="js/verify.min.js" ></script>-->
+        
+        <script>
+        	      
+		    $('#mpanel4').slideVerify({
+		    	type : 2,		//类型
+        		vOffset : 5,	//误差量，根据需求自行调整
+		        vSpace : 5,	//间隔
+		        imgName : ['1.jpg'],
+		        imgSize : {
+		        	width: '400px',
+		        	height: '200px',
+		        },
+		        blockSize : {
+		        	width: '40px',
+		        	height: '40px',
+		        },
+		        barSize : {
+		        	width : '400px',
+		        	height : '40px',
+		        },
+		        ready : function() {
+		    	},
+		        success : function() {
+		        	//alert('验证成功，添加你自己的代码！');
+                    document.getElementById("result").innerText="success";
+		        	//......后续操作
+		        },
+		        error : function() {
+//		        	//alert('验证失败！');
+                    document.getElementById("result").innerText="error";
+		        }
+		        
+		    });
+		    		    
+        </script>
+    </body>
+ 
+</html>
