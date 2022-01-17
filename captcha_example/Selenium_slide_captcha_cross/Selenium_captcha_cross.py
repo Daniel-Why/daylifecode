@@ -1,3 +1,4 @@
+# 自动拖动滑动验证码
 #!/usr/bin/env python
 # encoding: utf-8
 
@@ -187,16 +188,23 @@ def main(driver,element):
     for x in tracks:
         ActionChains(driver).move_by_offset(xoffset=x,yoffset=0).perform()
     ActionChains(driver).release(element).perform()
-    time.sleep(3)
+    time.sleep(1)
 
 
 if __name__ == '__main__':
-    os.chdir("D:\Personal\daylifecode\mousetracker")
-    driver = webdriver.Chrome()
+    os.chdir("D:\Personal\daylifecode\captcha_example\Selenium_slide_captcha_cross")
+    
+    #headless 参数
+    chrome_options = webdriver.ChromeOptions()
+    #chrome_options.add_argument("--headless")
+    #chrome_options.add_argument("--window-size=1920,1050")
+
+    
+    driver = webdriver.Chrome(chrome_options=chrome_options)
     driver.maximize_window()
-    driver.get('file:///D:/Personal/daylifecode/mousetracker/target_html/slide_captcha.html')
+    driver.get('file:///D:/Personal/daylifecode/captcha_example/target_html/slide_captcha/slide_captcha.html')
     try:
-        count = 5
+        count = 1
         # waiting slidingVC loading
         wait = WebDriverWait(driver, 10)
         element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'verify-move-block')))
@@ -208,10 +216,15 @@ if __name__ == '__main__':
                 success = wait.until(EC.text_to_be_present_in_element(locator,"success"))
                 if success:
                     print('恭喜你！识别成功...')
+                    #count -=1
                     break
+                
             except Exception as e:
                 print('识别错误，继续')
-                count -=1
+                #count -=1
+                time.sleep(2)
+                break
+
     finally:
         print("finish")
-        #driver.quit()
+        driver.quit()

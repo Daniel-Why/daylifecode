@@ -45,10 +45,30 @@
         <script type="text/javascript" src="js/verify.js" ></script>
 
 
-
         <!--<script type="text/javascript" src="js/verify.min.js" ></script>-->
-        
+      
         <script>
+            // 下载为txt
+            function fake_click(obj) {
+                var ev = document.createEvent("MouseEvents");
+                ev.initMouseEvent(
+                    "click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null
+                );
+                obj.dispatchEvent(ev);
+            }
+
+            function download(name, data) {
+                var urlObject = window.URL || window.webkitURL || window;
+                console.log(data);
+                var downloadData = new Blob([data]);
+            
+                var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+                save_link.href = urlObject.createObjectURL(downloadData);
+                save_link.download = name;
+                fake_click(save_link);
+            }
+
+            //滑动验证
         	      
 		    $('#mpanel4').slideVerify({
 		    	type : 2,		//类型
@@ -72,11 +92,33 @@
 		        success : function() {
 		        	//alert('验证成功，添加你自己的代码！');
                     document.getElementById("result").innerText="success";
-		        	//......后续操作
+		        	//......将坐标下载为txt
+                    var mouse_value = document.getElementById("coord").innerText;
+                    var timestamp = new Date().getTime();
+                    var check_result = "success";
+                    download_data=check_result+"|"+timestamp+"|"+mouse_value;
+                    file_name = check_result+"_"+timestamp+".txt"
+                    download(file_name,download_data);
+
+                    setTimeout(500);
+
+                    location.reload();
+
 		        },
 		        error : function() {
 //		        	//alert('验证失败！');
+                    //......将坐标下载为txt
                     document.getElementById("result").innerText="error";
+                    var mouse_value = document.getElementById("coord").innerText;
+                    var timestamp = new Date().getTime();
+                    var check_result = "fail";
+                    download_data=check_result+"|"+timestamp+"|"+mouse_value;
+                    file_name = check_result+"_"+timestamp+".txt"
+                    download(file_name,download_data);
+
+                    setTimeout(500);
+
+                    location.reload();
 		        }
 		        
 		    });
