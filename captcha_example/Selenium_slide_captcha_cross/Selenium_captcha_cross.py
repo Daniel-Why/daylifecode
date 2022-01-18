@@ -17,133 +17,65 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 
-def get_merge_img(img_content,location_list,num):
-    '''
-    拼接图片
-    :param img_content:
-    :param location_list:
-    :param num:
-    :return:
-    '''
-    im = Image.open(img_content)
-    im_list_upper = []
-    im_list_done = []
-    for  location  in location_list:
-        # print(location)
-        if int(location['y']) == -58:
-            im_list_upper.append(im.crop((abs(int(location['x'])),58,abs(int(location['x']))+10,116)))
-        if int(location['y']) == 0:
-            im_list_done.append(im.crop((abs(int(location['x'])),0,abs(int(location['x']))+10,58)))
-
-#create new image
-    new_im = Image.new('RGB',(260,116))
-    x_offset=0
-    for im in im_list_upper:
-        new_im.paste(im,(x_offset,0))
-        x_offset +=10
-
-    x_offset = 0
-    for im in im_list_done:
-        new_im.paste(im, (x_offset, 58))
-        x_offset += 10
-
-    return new_im
-
-
-def get_img(driver,div_class,num):
-    '''
-    获取图片
-    :param driver:
-    :param div_class:
-    :param num:
-    :return:
-    '''
-    background_imgs = driver.find_elements_by_class_name(div_class)
-    location_list = []
-    imge_url = ''
-    for img in background_imgs:
-
-        location = {}
-        imge_url = re.findall(r'background-image: url\(\"(.*?)\"\); background-position: (.*?)px (.*?)px;',img.get_attribute('style'))[0][0]
-        location['x'] = re.findall(r'background-image: url\(\"(.*?)\"\); background-position: (.*?)px (.*?)px;',img.get_attribute('style'))[0][1]
-        location['y'] = re.findall(r'background-image: url\(\"(.*?)\"\); background-position: (.*?)px (.*?)px;',img.get_attribute('style'))[0][2]
-
-        location_list.append(location)
-
-    response = requests.get(imge_url).content
-    img_content  = BytesIO(response)
-
-    image = get_merge_img(img_content,location_list,num)
-    image.save('{}.jpg'.format(num))
-    return image
+#def get_merge_img(img_content,location_list,num):
+#    '''
+#    拼接图片
+#    :param img_content:
+#    :param location_list:
+#    :param num:
+#    :return:
+#    '''
+#    im = Image.open(img_content)
+#    im_list_upper = []
+#    im_list_done = []
+#    for  location  in location_list:
+#        # print(location)
+#        if int(location['y']) == -58:
+#            im_list_upper.append(im.crop((abs(int(location['x'])),58,abs(int(location['x']))+10,116)))
+#        if int(location['y']) == 0:
+#            im_list_done.append(im.crop((abs(int(location['x'])),0,abs(int(location['x']))+10,58)))
+#
+##create new image
+#    new_im = Image.new('RGB',(260,116))
+#    x_offset=0
+#    for im in im_list_upper:
+#        new_im.paste(im,(x_offset,0))
+#        x_offset +=10
+#
+#    x_offset = 0
+#    for im in im_list_done:
+#        new_im.paste(im, (x_offset, 58))
+#        x_offset += 10
+#
+#    return new_im
 
 
-def get_diff_location(image1,image2):
-    '''
-    通过像素对比 找到缺口位置
-    :param image1:
-    :param image2:
-    :return:
-    '''
-    size = image1.size
-    for x in range(1,size[0]):
-        for y in range(1, size[1]):
-            if is_similar(image1,image2,x,y) == False:
-                #判断成立 表示xy这个点 两张图不一样
-                print("different")
-                return x
-            else:
-                pass
-
-
-def is_similar(image1,image2,x,y):
-    pixel1 = image1.getpixel((x,y))
-    pixel2 = image2.getpixel((x,y))
-    
-    for i in range(0,3):
-        pixel_result=[x,y]
-        sub= abs(pixel1[i] - pixel2[i])
-        pixel_result.append(sub)
-        #print(pixel_result)
-        if sub >=100:
-            return False
-    return True
-
-def get_track(x):
-    '''
-    滑块移动轨迹
-    初速度 v =0
-    单位时间 t = 0.2
-    位移轨迹 tracks = []
-    当前位移 ccurrent = 0
-    :param x:
-    :return:
-    '''
-    v = 0
-    t = 0.2
-    tracks = []
-    current = 0
-    # mid = x*5/8#到达mid值开始减速
-    # x = x+10
-    while current < x:
-        # if current < mid:
-        #     a = random.randint(1,3)
-        # else:
-        #     a = -random.randint(2,4)
-        a = 2
-        v0 = v
-        #单位时间内位移公式
-        s =v0*t+0.5*a*(t**2)
-        #当前位移
-        current = current+s
-        tracks.append(round(s))
-        v = v0+a*t
-
-    for i in range(3):
-        tracks.append(-1)
-    for i in range(3):
-        tracks.append(2)
-    return tracks
+#def get_img(driver,div_class,num):
+#    '''
+#    获取图片
+#    :param driver:
+#    :param div_class:
+#    :param num:
+#    :return:
+#    '''
+#    background_imgs = driver.find_elements_by_class_name(div_class)
+#    location_list = []
+#    imge_url = ''
+#    for img in background_imgs:
+#
+#        location = {}
+#        imge_url = re.findall(r'background-image: url\(\"(.*?)\"\); background-position: (.*?)px (.*?)px;',img.get_attribute('style'))[0][0]
+#        location['x'] = re.findall(r'background-image: url\(\"(.*?)\"\); background-position: (.*?)px (.*?)px;',img.get_attribute('style'))[0][1]
+#        location['y'] = re.findall(r'background-image: url\(\"(.*?)\"\); background-position: (.*?)px (.*?)px;',img.get_attribute('style'))[0][2]
+#
+#        location_list.append(location)
+#
+#    response = requests.get(imge_url).content
+#    img_content  = BytesIO(response)
+#
+#    image = get_merge_img(img_content,location_list,num)
+#    image.save('{}.jpg'.format(num))
+#    return image
 
 #获取 Canvas 图片
 def get_canv(driver,div_class,filename):
@@ -169,6 +101,90 @@ def get_canv(driver,div_class,filename):
     im = Image.open(filename+".png")
     return im
 
+
+
+# 查找缺口位置
+def get_diff_location(image1,image2):
+    '''
+    通过像素对比 找到缺口位置
+    :param image1:
+    :param image2:
+    :return:
+    '''
+    size = image1.size
+    for x in range(1,size[0]):
+        for y in range(1, size[1]):
+            if is_similar(image1,image2,x,y) == False:
+                #判断成立 表示xy这个点 两张图不一样
+                print("different")
+                return x
+            else:
+                pass
+
+# 比较像素点
+def is_similar(image1,image2,x,y):
+    pixel1 = image1.getpixel((x,y))
+    pixel2 = image2.getpixel((x,y))
+    
+    for i in range(0,3):
+        pixel_result=[x,y]
+        sub= abs(pixel1[i] - pixel2[i])
+        pixel_result.append(sub)
+        #print(pixel_result)
+        if sub >=100:
+            return False
+    return True
+
+###################### 鼠标移动算法 ##########################
+# 变加速运动
+def get_track(x):
+    '''
+    滑块移动轨迹
+    初速度 v =0
+    单位时间 t = 0.2
+    位移轨迹 tracks = []
+    当前位移 ccurrent = 0
+    :param x:
+    :return:
+    '''
+    v = 20
+    tracks = []
+    current = 0
+    mid = x*7/10#到达mid值开始减速
+    # x = x+10
+    while current < x:
+        coord=[]
+        t_list = [17, 17, 17, 17, 17, 17, 17, 17, 16, 16, 16, 16, 16, 66, 18, 124, 8, 37, 19]
+        t= 0.01*random.choice(t_list)
+
+        s_ylist = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, -1, 2]
+        s_y = random.choice(s_ylist)
+        if current < mid:
+            a = random.randint(100,200)
+        else:
+            a = -random.randint(200,400)
+            s_y = random.choice(s_ylist)
+        #a = 20
+        v0 = v
+        #单位时间内位移公式
+        s_x =v0*t+0.5*a*(t**2)
+        #当前位移
+        current = current+s_x
+        coord.append(round(s_x))
+        coord.append(round(s_y))
+        tracks.append(coord)
+        v = v0+a*t
+
+    for i in range(3):
+        tracks.append([-1,-1])
+    for i in range(3):
+        tracks.append([2,2])
+    return tracks
+
+
+
+
+########################主函数################################
 def main(driver,element):
 
     #1为完整图、2为有缺口图
@@ -185,10 +201,10 @@ def main(driver,element):
 
     tracks = get_track(x)
     ActionChains(driver).click_and_hold(element).perform()
-    for x in tracks:
-        ActionChains(driver).move_by_offset(xoffset=x,yoffset=0).perform()
+    for coord in tracks:
+        ActionChains(driver).move_by_offset(xoffset=coord[0],yoffset=coord[1]).perform()
     ActionChains(driver).release(element).perform()
-    time.sleep(1)
+    time.sleep(0.5)
 
 
 if __name__ == '__main__':
@@ -222,7 +238,7 @@ if __name__ == '__main__':
             except Exception as e:
                 print('识别错误，继续')
                 #count -=1
-                time.sleep(2)
+                #time.sleep(2)
                 break
 
     finally:

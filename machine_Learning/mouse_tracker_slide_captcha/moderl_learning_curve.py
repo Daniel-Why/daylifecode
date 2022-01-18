@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import pickle
 from sklearn.model_selection import learning_curve
-from sklearn import datasets
+import os
 
 # 绘制学习曲线
 def plot_learning_curve(estimator,title,X,y,ylim=None,cv=None,n_jobs =1,train_sizes=np.linspace(.05,1.,20),verbose=0,plot=True):
@@ -48,19 +48,23 @@ def plot_learning_curve(estimator,title,X,y,ylim=None,cv=None,n_jobs =1,train_si
         plt.draw()
 
 #%%
+'''
+os.chdir("D:\Personal\daylifecode\machine_Learning\mouse_tracker_slide_captcha")
+
 # plot 展示中文字体
 matplotlib.rc('font',family='MicroSoft YaHei',weight='bold')
 
 # 打开模型
-with open("model.pickle","rb") as nf:
+with open("mouse_tracker_model.pickle","rb") as nf:
     bc_model = pickle.load(nf)
 
 # 获取 sklearn cancer数据集
-cancer = datasets.load_breast_cancer()
-cancer_X = cancer.data
-cancer_Y = cancer.target
+mouse_data = np.load(".\clean_data\clean_data_step_03.npy")
+mouse_X = mouse_data.T[1:].T # 特征数据
+mouse_Y= mouse_data.T[0].T   # 分类结果
 
 # 绘制学习曲线
-plot_learning_curve(bc_model,u"学习曲线02",cancer_X,cancer_Y,n_jobs=8)
+plot_learning_curve(bc_model,u"学习曲线02",mouse_X,mouse_Y,n_jobs=8)
 
+'''
 #%%
