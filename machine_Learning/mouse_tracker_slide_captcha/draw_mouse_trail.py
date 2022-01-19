@@ -37,10 +37,11 @@ for i,rows in enumerate(clean_data_S01):
         mouse_data = rows
         print(n)
         if rows[0] == "1":
-            print("Bot")
-        elif rows[0] == "0":
-            #print("Human")
+            #print("Bot")
             continue
+        elif rows[0] == "0":
+            print("Human")
+            #continue
         coords_nparry = mouseData_to_nparry(mouse_data)
         draw_mouse_trail(coords_nparry)
         n +=1

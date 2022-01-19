@@ -136,33 +136,24 @@ def is_similar(image1,image2,x,y):
     return True
 
 ###################### 鼠标移动算法 ##########################
-# 变加速运动
-def get_track(x):
-    '''
-    滑块移动轨迹
-    初速度 v =0
-    单位时间 t = 0.2
-    位移轨迹 tracks = []
-    当前位移 ccurrent = 0
-    :param x:
-    :return:
-    '''
+#注意:packages\selenium\webdriver\common\actions\pointer_input.py中DEFAULT_MOVE_DURATION 可修改鼠标每次移动间隔，以模拟真人移动时间，默认250
+# 分段变加速运动
+def get_track_01(x):
     v = 20
     tracks = []
     current = 0
     mid = x*7/10#到达mid值开始减速
-    # x = x+10
     while current < x:
         coord=[]
-        t_list = [17, 17, 17, 17, 17, 17, 17, 17, 16, 16, 16, 16, 16, 66, 18, 124, 8, 37, 19]
-        t= 0.01*random.choice(t_list)
+        t_list = [17, 17, 17, 17, 17, 17, 17, 17, 16, 16, 16, 16, 16, 66, 18, 8, 37, 19]
+        t= 0.001*random.choice(t_list)
 
         s_ylist = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, -1, 2]
         s_y = random.choice(s_ylist)
         if current < mid:
-            a = random.randint(100,200)
+            a = random.randint(4000,8000)
         else:
-            a = -random.randint(200,400)
+            a = -random.randint(8000,12000)
             s_y = random.choice(s_ylist)
         #a = 20
         v0 = v
@@ -176,15 +167,62 @@ def get_track(x):
         v = v0+a*t
 
     for i in range(3):
-        tracks.append([-1,-1])
+        tracks.append([-1,0])
     for i in range(3):
-        tracks.append([2,2])
+        tracks.append([2,0])
+    print(tracks)
+    return tracks
+    
+# 变加速运动
+def get_track_02(x):
+    v = 20
+    tracks = []
+    current = 0
+    while current < x:
+        coord=[]
+        t_list = [17, 17, 17, 17, 17, 17, 17, 17, 16, 16, 16, 16, 16, 66, 18, 8, 37, 19]
+        t= 0.001*random.choice(t_list)
+
+        s_ylist = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, -1, 2]
+        s_y = random.choice(s_ylist)
+        a = 300
+        v0 = v
+        #单位时间内位移公式
+        s_x =v0*t+0.5*a*(t**2)
+        #当前位移
+        current = current+s_x
+        coord.append(round(s_x))
+        coord.append(round(s_y))
+        tracks.append(coord)
+        v = v0+a*t
+
+    for i in range(3):
+        tracks.append([-1,0])
+    for i in range(3):
+        tracks.append([2,0])
+    print(tracks)
     return tracks
 
+# 两点直线
+def get_track_03(x):
+    v = 20
+    tracks = []
+    tracks.append([0,0])
+    tracks.append([x,0])
+    print(tracks)
+    return tracks
 
-
-
-########################主函数################################
+### 选择算法
+def get_track(x,func_num=1):
+    if func_num == 1:
+        tracks = get_track_01(x)
+    elif func_num == 2:
+        tracks = get_track_02(x)
+    elif func_num == 3:
+        tracks = get_track_03(x)
+        
+    return tracks
+#########################滑块验证模块#####################
 def main(driver,element):
 
     #1为完整图、2为有缺口图
@@ -195,18 +233,20 @@ def main(driver,element):
     #加上之前减去的推动块的x
     imgelement_block = driver.find_element_by_class_name("verify-sub-block")
     size1 = imgelement_block.size
-    x = int(org_x+size1["width"])
+    move_para = 3 #自定义参数，用于图像识别消减误差
+    x = int(org_x+size1["width"]+move_para)
     print(x)
 
 
-    tracks = get_track(x)
+    tracks = get_track(x,3)
     ActionChains(driver).click_and_hold(element).perform()
     for coord in tracks:
+        #packages\selenium\webdriver\common\actions\pointer_input.py中DEFAULT_MOVE_DURATION 可修改鼠标移动间隔 250
         ActionChains(driver).move_by_offset(xoffset=coord[0],yoffset=coord[1]).perform()
     ActionChains(driver).release(element).perform()
     time.sleep(0.5)
 
-
+########################主函数################################
 if __name__ == '__main__':
     os.chdir("D:\Personal\daylifecode\captcha_example\Selenium_slide_captcha_cross")
     

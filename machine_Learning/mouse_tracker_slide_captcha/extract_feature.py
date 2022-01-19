@@ -218,6 +218,12 @@ def extract_y_traceback_num(trace:np.ndarray):
         return 0
     return cnt
 
+# 判断鼠标移动次数数量
+def extract_move_num(trace:np.ndarray):
+    trace = trace.T
+    move_num=len(trace[1])
+    return move_num
+
 ###### 特征提取集合 #######
 def extract_feature(trace:np.ndarray):
         
@@ -236,23 +242,29 @@ def extract_feature(trace:np.ndarray):
         #速度变化率
         speed_change_rate = extract_speed_change_rate(coords_nparray)
 
-        #x方向是否有重复轨迹
-        x_traceback = extract_if_x_traceback(coords_nparray)
+        # x方向是否有重复轨迹
+        #x_traceback = extract_if_x_traceback(coords_nparray)
 
-        #y方向是否有重复轨迹
-        y_traceback = extract_if_y_traceback(coords_nparray)
+        # y方向是否有重复轨迹
+        #y_traceback = extract_if_y_traceback(coords_nparray)
 
         # 判断x方向重复轨迹数量
         x_traceback_num = extract_x_traceback_num(coords_nparray)
 
         # 判断y方向重复轨迹数量
         y_traceback_num = extract_y_traceback_num(coords_nparray)
-        return [used_t,avg_s,max_s,min_s,speed_change_rate,x_traceback,y_traceback,x_traceback_num,y_traceback_num]
+
+        # 判断鼠标移动次数数量
+        move_num = extract_move_num(coords_nparray)
+
+        return [used_t,avg_s,max_s,min_s,speed_change_rate,x_traceback_num,y_traceback_num,move_num]
+
 
 #%% 主函数
 os.chdir("D:\Personal\daylifecode\machine_Learning\mouse_tracker_slide_captcha")
 clean_data_S02 = csv.reader(open(r".\clean_data\clean_data_step_02.csv"))
 clean_data=[]
+test_datas =[]
 for i,data_row in enumerate(clean_data_S02):
     if i != 0:
         info_data = int_data(data_row[:3])
@@ -275,7 +287,7 @@ np_save_path = ".\clean_data\clean_data_step_03.npy"
 save_npy(np_save_path,clean_data)
 
 csv_save_path = ".\clean_data\clean_data_step_03.csv"
-header_list=["Bot","captcha_result","used_t","avg_s","max_s","min_s","speed_change_rate","x_traceback","y_traceback","x_traceback_num","y_traceback_num"]
+header_list=["Bot","captcha_result","used_t","avg_s","max_s","min_s","speed_change_rate","x_traceback_num","y_traceback_num","move_num"]
 save_csv(csv_save_path,clean_data,header_list)
 
 # %%
