@@ -58,7 +58,7 @@ matplotlib.rc('font',family='MicroSoft YaHei',weight='bold')
 with open("mouse_tracker_model.pickle","rb") as nf:
     bc_model = pickle.load(nf)
 
-# 获取 sklearn cancer数据集
+# 获取数据集
 mouse_data = np.load(".\clean_data\clean_data_step_03.npy")
 mouse_X = mouse_data.T[1:].T # 特征数据
 mouse_Y= mouse_data.T[0].T   # 分类结果

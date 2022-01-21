@@ -1,4 +1,5 @@
 #%%
+from re import split
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split,learning_curve
 import numpy as np
@@ -8,7 +9,7 @@ import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
 import pickle
 import os
-from moderl_learning_curve import plot_learning_curve
+from model_learning_curve import plot_learning_curve
 # 绘图
 def pic_print(data_arrary,target_arrary,pic_shape="3D"):
     mouse_ALL = np.c_[target_arrary,data_arrary]#将特征数据和分类结果数据组合子在一起
@@ -42,7 +43,8 @@ mouse_Y= mouse_data.T[0].T   # 分类结果
 
 #%% 将数据集分为测试集和训练集，测试集占30%
 
-X_train,X_test,Y_train,Y_test=train_test_split(mouse_X,mouse_Y,test_size=0.3)
+X_train,X_test,Y_train,Y_test=train_test_split(mouse_X,mouse_Y,test_size=0.3
+)
 
 
 #%% 利用逻辑回归算法训练模型

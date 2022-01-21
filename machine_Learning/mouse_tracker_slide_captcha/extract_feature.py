@@ -257,7 +257,7 @@ def extract_feature(trace:np.ndarray):
         # 判断鼠标移动次数数量
         move_num = extract_move_num(coords_nparray)
 
-        return [used_t,avg_s,max_s,min_s,speed_change_rate,x_traceback_num,y_traceback_num,move_num]
+        return [avg_s,max_s,min_s,speed_change_rate,x_traceback_num,y_traceback_num,move_num]
 
 
 #%% 主函数
@@ -287,7 +287,7 @@ np_save_path = ".\clean_data\clean_data_step_03.npy"
 save_npy(np_save_path,clean_data)
 
 csv_save_path = ".\clean_data\clean_data_step_03.csv"
-header_list=["Bot","captcha_result","used_t","avg_s","max_s","min_s","speed_change_rate","x_traceback_num","y_traceback_num","move_num"]
+header_list=["Bot","captcha_result","avg_s","max_s","min_s","speed_change_rate","x_traceback_num","y_traceback_num","move_num"]
 save_csv(csv_save_path,clean_data,header_list)
 
 # %%

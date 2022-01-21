@@ -23,7 +23,7 @@ def all_file_route(format = None,dir_path = '.',topdown = True): #获取文件�
 
 def clean_data_step01(data_row):
             # 将“success”、“fail”转换成 1或0，将坐标和时间戳转换成int
-            old_data01 = data_row[:2]#列表 "是否是bot|验证成功与否|验证数据获取时间错"
+            old_data01 = data_row[:2]#列表 "是否是bot|验证成功与否|验证数据获取时间戳"
             old_data02 = data_row[2:]#列表 "[x0,y0,时间戳],[x1,y1,时间戳]..."
             new_data = []
             # 将“success”、“fail”转换成 1或0

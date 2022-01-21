@@ -78,7 +78,7 @@ os.chdir("D:\Personal\daylifecode\machine_Learning\mouse_tracker_slide_captcha")
 clean_data_S02 = csv.reader(open(r".\clean_data\clean_data_step_02.csv"))
 test_datas =[]
 for i,data_row in enumerate(clean_data_S02):
-    if i != 0 and data_row[0] =="1":
+    if i != 0 and data_row[0] =="0":
         info_data = int_data(data_row[:3])
         coords_nparray = mouseData_to_nparry(data_row)
 
