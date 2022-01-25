@@ -37,8 +37,8 @@ for i,rows in enumerate(clean_data_S01):
         mouse_data = rows
         print(n)
         if rows[0] == "1":
-            #print("Bot")
-            continue
+            print("Bot")
+            #continue
         elif rows[0] == "0":
             print("Human")
             #continue

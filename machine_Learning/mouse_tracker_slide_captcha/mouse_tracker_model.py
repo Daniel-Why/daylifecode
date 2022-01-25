@@ -48,7 +48,7 @@ X_train,X_test,Y_train,Y_test=train_test_split(mouse_X,mouse_Y,test_size=0.3
 
 
 #%% 利用逻辑回归算法训练模型
-clf = LogisticRegression(penalty="l1",max_iter=5000,solver="liblinear",multi_class="ovr",n_jobs=4)
+clf = LogisticRegression(penalty="l1",max_iter=5000,solver="liblinear",multi_class="ovr",n_jobs=8)
 clf.fit(X_train,Y_train)
 
 #%% 利用测试集进行测试

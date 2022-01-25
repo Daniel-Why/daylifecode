@@ -238,7 +238,7 @@ def main(driver,element):
     print(x)
 
 
-    tracks = get_track(x,3)
+    tracks = get_track(x,2)
     ActionChains(driver).click_and_hold(element).perform()
     for coord in tracks:
         #packages\selenium\webdriver\common\actions\pointer_input.py中DEFAULT_MOVE_DURATION 可修改鼠标移动间隔 250
