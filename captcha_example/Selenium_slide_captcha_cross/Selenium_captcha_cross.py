@@ -151,9 +151,9 @@ def get_track_01(x):
         s_ylist = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, -1, 2]
         s_y = random.choice(s_ylist)
         if current < mid:
-            a = random.randint(4000,8000)
+            a = random.randint(400,800)
         else:
-            a = -random.randint(8000,12000)
+            a = -random.randint(800,1200)
             s_y = random.choice(s_ylist)
         #a = 20
         v0 = v
@@ -238,7 +238,7 @@ def main(driver,element):
     print(x)
 
 
-    tracks = get_track(x,2)
+    tracks = get_track(x,3)
     ActionChains(driver).click_and_hold(element).perform()
     for coord in tracks:
         #packages\selenium\webdriver\common\actions\pointer_input.py中DEFAULT_MOVE_DURATION 可修改鼠标移动间隔 250

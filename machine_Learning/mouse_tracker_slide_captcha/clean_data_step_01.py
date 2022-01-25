@@ -1,6 +1,7 @@
 # 提取验证码验证数据，包括机器人与否、验证成功与否、数据获取时间、鼠标移动数据，并生成csv
 import os
 import csv
+import fire
 
 def read_lines(f_path):#读取文件所有行
     f = open(f_path, "r+",encoding='UTF-8')
@@ -70,20 +71,33 @@ def mouse_data_clean(file_route_list,data_type):#human:0;bot:1;unknow:2
     return clean_data_list
 
 
-if __name__ == '__main__':
-
+def main(data_type = "train"):
     os.chdir("D:\Personal\daylifecode\machine_Learning\mouse_tracker_slide_captcha")
     excel_path=".\clean_data\clean_data_step_01.csv"
-    bot_data_path=r".\orginal_data\bot"
-    human_data_path=".\orginal_data\human"
+    
+    if data_type =="train":
+        # 训练集、验证集
+        bot_data_path=r".\train_data\bot"
+        human_data_path=r".\train_data\human"
+    elif data_type == "test":
+        # 测试集
+        bot_data_path=r".\test_data\bot"
+        human_data_path=r".\test_data\human"
+
+
     humandata_list = all_file_route(dir_path=human_data_path,format='.txt')#找出所有的txt
     botdata_list = all_file_route(dir_path=bot_data_path,format='.txt')#找出所有的txt
+
+    print(len(humandata_list))
+    print(len(botdata_list))
 
     print("#####start######")
     #整理录入坐标数据
     bot_clean_data = mouse_data_clean(botdata_list,1)
 
+
     human_clean_data = mouse_data_clean(humandata_list,0)
+
 
     #合并数据
     clean_data = []
@@ -97,3 +111,7 @@ if __name__ == '__main__':
         f_csv.writerow(header_list)
         f_csv.writerows(clean_data)
         print("######finish######")
+
+
+if __name__ == '__main__':
+    fire.Fire(main)

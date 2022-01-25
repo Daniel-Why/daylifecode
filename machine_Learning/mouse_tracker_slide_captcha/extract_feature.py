@@ -3,6 +3,7 @@
 #%%
 import os
 import csv
+import fire
 from joblib import parallel_backend
 import numpy as np
 import pandas as pd
@@ -384,9 +385,10 @@ def extract_adjacent_angle_type(trace:np.ndarray):
                 parallel_num +=1
 
         angle_tupe_sum=up_num+down_num+parallel_num
-
-        return up_num/angle_tupe_sum,down_num/angle_tupe_sum,parallel_num/angle_tupe_sum
-
+        if angle_tupe_sum != 0:
+            return up_num/angle_tupe_sum,down_num/angle_tupe_sum,parallel_num/angle_tupe_sum
+        else:
+            return 0,0,0
     else:
         return 0,0,0
 
@@ -395,20 +397,20 @@ def extract_adjacent_angle_type(trace:np.ndarray):
 def extract_feature(trace:np.ndarray):
      
     #完成验证时间
-    used_t = extract_used_time(coords_nparray)
+    used_t = extract_used_time(trace)
 
     #速度平均值
-    avg_s = extract_avg_speed(coords_nparray)
+    avg_s = extract_avg_speed(trace)
 
     #速度最大值
-    max_s = extract_max_speed(coords_nparray)
+    max_s = extract_max_speed(trace)
 
     #速度最小值
-    min_s = extract_min_speed(coords_nparray)
+    min_s = extract_min_speed(trace)
 
     
     #速度变化率
-    speed_change_rate = extract_speed_change_rate(coords_nparray)
+    speed_change_rate = extract_speed_change_rate(trace)
 
     # x方向是否有重复轨迹
     #x_traceback = extract_if_x_traceback(coords_nparray)
@@ -417,64 +419,66 @@ def extract_feature(trace:np.ndarray):
     #y_traceback = extract_if_y_traceback(coords_nparray)
 
     # 判断x方向重复轨迹数量
-    x_traceback_num = extract_x_traceback_num(coords_nparray)
+    x_traceback_num = extract_x_traceback_num(trace)
 
     # 判断y方向重复轨迹数量
-    y_traceback_num = extract_y_traceback_num(coords_nparray)
+    y_traceback_num = extract_y_traceback_num(trace)
 
     # 判断鼠标移动次数数量
-    move_num = extract_move_num(coords_nparray)
+    move_num = extract_move_num(trace)
     
     # x 方向差分
-    diff_x_std,diff_x_max,diff_x_min,diff_x_skew= extract_x_diff(coords_nparray)
+    diff_x_std,diff_x_max,diff_x_min,diff_x_skew= extract_x_diff(trace)
 
     # y 方向差分
-    diff_y_std = extract_y_diff(coords_nparray)
+    diff_y_std = extract_y_diff(trace)
 
     # t 方向差分
-    diff_t_std,diff_t_mean = extract_t_diff(coords_nparray)
+    diff_t_std,diff_t_mean = extract_t_diff(trace)
 
     # 相邻点的一些特征
-    adj_point_dis_max,adj_point_v_std,adj_point_v_mean,v_last,v_first,diff_v_std,diff_v_max,diff_v_min,diff_v_mean,diff_v_median=extract_adjacent_point(coords_nparray)
+    adj_point_dis_max,adj_point_v_std,adj_point_v_mean,v_last,v_first,diff_v_std,diff_v_max,diff_v_min,diff_v_mean,diff_v_median=extract_adjacent_point(trace)
     
     # 相邻点角度序列
-    angle_std,angle_kurt=extract_adjacent_angle(coords_nparray)
+    angle_std,angle_kurt=extract_adjacent_angle(trace)
 
     # 相邻点围成的三角形的凹凸情况
-    up_num,down_num,parallel_num = extract_adjacent_angle_type(coords_nparray)
+    up_num,down_num,parallel_num = extract_adjacent_angle_type(trace)
 
 
     return [avg_s,max_s,min_s,speed_change_rate,x_traceback_num,y_traceback_num,move_num,diff_x_std,diff_x_max,diff_x_min,diff_x_skew,diff_y_std,diff_t_mean,diff_t_std,adj_point_dis_max,adj_point_v_std,adj_point_v_mean,v_last,v_first,diff_v_std,diff_v_max,diff_v_min,diff_v_mean,diff_v_median,angle_std,angle_kurt,up_num,down_num,parallel_num]
 
-
-#%% 主函数
-os.chdir("D:\Personal\daylifecode\machine_Learning\mouse_tracker_slide_captcha")
-clean_data_S02 = csv.reader(open(r".\clean_data\clean_data_step_02.csv"))
-clean_data=[]
-test_datas =[]
-for i,data_row in enumerate(clean_data_S02):
-    if i != 0:
-        info_data = int_data(data_row[:3])
-        coords_nparray = mouseData_to_nparry(data_row)
-        
-        #绘制鼠标轨迹
-        #draw_mouse_trail(coords_nparray)
-
-        #提取特征
-        extract_feature_list = extract_feature(coords_nparray)
-
-        mouse_data = []
-        mouse_data.extend(info_data[:-1])
-        mouse_data.extend(extract_feature_list)
-        clean_data.append(mouse_data)
-        print("{} row finished!".format(i))
-
-# %% 数据存储为npy格式和csv格式
-np_save_path = ".\clean_data\clean_data_step_03.npy"
-save_npy(np_save_path,clean_data)
-
-csv_save_path = ".\clean_data\clean_data_step_03.csv"
-header_list=["Bot","captcha_result","avg_s","max_s","min_s","speed_change_rate","x_traceback_num","y_traceback_num","move_num","diff_x_std","diff_x_max","diff_x_min","diff_x_skew","diff_y_std","diff_t_mean","diff_t_std","adj_point_dis_max","adj_point_v_std","adj_point_v_mean","v_last","v_first","diff_v_std","diff_v_max","diff_v_min","diff_v_mean","diff_v_median","angle_std","angle_kurt","up_num","down_num","parallel_num"]
-save_csv(csv_save_path,clean_data,header_list)
-
-# %%
+def main(data_name="train_data"):
+    #%% 主函数
+    os.chdir("D:\Personal\daylifecode\machine_Learning\mouse_tracker_slide_captcha")
+    clean_data_S02 = csv.reader(open(r".\clean_data\clean_data_step_02.csv"))
+    clean_data=[]
+    test_datas =[]
+    for i,data_row in enumerate(clean_data_S02):
+        if i != 0:
+            info_data = int_data(data_row[:3])
+            coords_nparray = mouseData_to_nparry(data_row)
+            
+            #绘制鼠标轨迹
+            #draw_mouse_trail(coords_nparray)
+    
+            #提取特征
+            extract_feature_list = extract_feature(coords_nparray)
+    
+            mouse_data = []
+            mouse_data.extend(info_data[:-1])
+            mouse_data.extend(extract_feature_list)
+            clean_data.append(mouse_data)
+            print("{} row finished!".format(i))
+    
+    # %% 数据存储为npy格式和csv格式
+    np_save_path = ".\clean_data\{}.npy".format(data_name)
+    save_npy(np_save_path,clean_data)
+    
+    csv_save_path = ".\clean_data\{}.csv".format(data_name)
+    header_list=["Bot","captcha_result","avg_s","max_s","min_s","speed_change_rate","x_traceback_num","y_traceback_num","move_num","diff_x_std","diff_x_max","diff_x_min","diff_x_skew","diff_y_std","diff_t_mean","diff_t_std","adj_point_dis_max","adj_point_v_std","adj_point_v_mean","v_last","v_first","diff_v_std","diff_v_max","diff_v_min","diff_v_mean","diff_v_median","angle_std","angle_kurt","up_num","down_num","parallel_num"]
+    save_csv(csv_save_path,clean_data,header_list)
+    
+    # %%
+if __name__ == '__main__':
+    fire.Fire(main)
