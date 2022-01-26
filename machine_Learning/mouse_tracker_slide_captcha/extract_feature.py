@@ -238,9 +238,11 @@ def extract_x_diff(trace:np.ndarray):
         diff_std = np.std(diff_list)     # 一阶差分的标准差
         diff_max = max(diff_list)   # 一阶差分的最大值
         diff_min = min(diff_list)   # 一阶差分的最小值
-
-        diff_pd = pd.Series(diff_list)
-        diff_skew = diff_pd.skew()  # 一阶差分的偏度
+        if len(diff_list) >= 2:
+            diff_pd = pd.Series(diff_list)
+            diff_skew = diff_pd.skew()  # 一阶差分的偏度
+        else:
+            diff_skew = 0
         return diff_std,diff_max,diff_min,diff_skew
 
     else:
@@ -297,7 +299,7 @@ def extract_adjacent_point(trace:np.ndarray):
     if len(trace.T[0]) >=2 :
         adj_point_dis_list = []
         adj_point_v_list = []
-
+        
         for i in range(0,len(trace.T[0])-1):
             trace = trace
             adj_point_dis = ((trace[i+1][0]-trace[i][0])**2+(trace[i+1][1]-trace[i][1])**2)**0.5 #相邻点距离
@@ -313,16 +315,23 @@ def extract_adjacent_point(trace:np.ndarray):
 
 
         # 速度差分
-        diff_v_list=[]
-        for i in range(0,len(adj_point_v_list)-1): 
-            diff_v = adj_point_v_list[i+1]-adj_point_v_list[i]
-            diff_v_list.append(diff_v)
+        if len(adj_point_v_list)>=2:
+            diff_v_list=[]
+            for i in range(0,len(adj_point_v_list)-1): 
+                diff_v = adj_point_v_list[i+1]-adj_point_v_list[i]
+                diff_v_list.append(diff_v)
 
-        diff_v_std = np.std(diff_v_list)     # 一阶差分的标准差
-        diff_v_max = max(diff_v_list)   # 一阶差分的最大值
-        diff_v_min = min(diff_v_list)   # 一阶差分的最小值
-        diff_v_mean= np.mean(diff_v_list)    # 一阶差分的平均值
-        diff_v_median = np.median(diff_v_list) # 一阶差分的中值
+            diff_v_std = np.std(diff_v_list)     # 一阶差分的标准差
+            diff_v_max = max(diff_v_list)   # 一阶差分的最大值
+            diff_v_min = min(diff_v_list)   # 一阶差分的最小值
+            diff_v_mean= np.mean(diff_v_list)    # 一阶差分的平均值
+            diff_v_median = np.median(diff_v_list) # 一阶差分的中值
+        else:
+            diff_v_std = 0     # 一阶差分的标准差
+            diff_v_max = 0  # 一阶差分的最大值
+            diff_v_min = 0   # 一阶差分的最小值
+            diff_v_mean= 0    # 一阶差分的平均值
+            diff_v_median = 0 # 一阶差分的中值
 
         return adj_point_dis_max,adj_point_v_std,adj_point_v_mean,v_last,v_first,diff_v_std,diff_v_max,diff_v_min,diff_v_mean,diff_v_median
 
