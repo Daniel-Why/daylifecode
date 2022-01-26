@@ -13,8 +13,7 @@ from  selenium.webdriver.support import expected_conditions as EC
 from  selenium.webdriver.common.by import By
 from  io import BytesIO
 from selenium.webdriver.common.action_chains import ActionChains
-
-
+from mouse_record import output_trace
 
 
 #def get_merge_img(img_content,location_list,num):
@@ -212,6 +211,12 @@ def get_track_03(x):
     print(tracks)
     return tracks
 
+# 录屏轨迹
+def get_track_04(x):
+    tracks = output_trace.get_trace(x)
+    print(tracks)
+    return tracks
+
 ### 选择算法
 def get_track(x,func_num=1):
     if func_num == 1:
@@ -220,6 +225,8 @@ def get_track(x,func_num=1):
         tracks = get_track_02(x)
     elif func_num == 3:
         tracks = get_track_03(x)
+    elif func_num == 4:
+        tracks = get_track_04(x)
         
     return tracks
 #########################滑块验证模块#####################
@@ -238,7 +245,7 @@ def main(driver,element):
     print(x)
 
 
-    tracks = get_track(x,3)
+    tracks = get_track(x,4)
     ActionChains(driver).click_and_hold(element).perform()
     for coord in tracks:
         #packages\selenium\webdriver\common\actions\pointer_input.py中DEFAULT_MOVE_DURATION 可修改鼠标移动间隔 250

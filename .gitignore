@@ -14,3 +14,4 @@ machine_Learning/mouse_tracker_slide_captcha/test_data/
 machine_Learning/mouse_tracker_slide_captcha/train_data/
 geckodriver.log
 *.pyc
+captcha_example/Selenium_slide_captcha_cross/mouse_record/orginal_data/
