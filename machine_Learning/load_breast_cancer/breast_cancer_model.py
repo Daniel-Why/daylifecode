@@ -48,7 +48,7 @@ X_train,X_test,Y_train,Y_test=train_test_split(cancer_X,cancer_Y,test_size=0.3)
 
 #%%
 pic_print(X_train,Y_train,pic_shape="3D")
-#%%
+#%% 逻辑回归模型
 clf = LogisticRegression(penalty="l1",max_iter=5000,solver="liblinear",multi_class="ovr",n_jobs=4)
 clf.fit(X_train,Y_train)
 
