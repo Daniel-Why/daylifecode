@@ -10,7 +10,7 @@ def scan_file_list(file_dir): #读取目标文件夹内所有除了 .py 文件
     return aa
 
 # filePrefix = '.md'    #文件后缀
-os.chdir('C://Users//Daniel.Why//Desktop//video')
+os.chdir('C://Users//D2010//Desktop//tmp')
 
 aa = scan_file_list('.')
 
