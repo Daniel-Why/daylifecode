@@ -9,7 +9,7 @@ def scan_file_list(file_dir): #读取目标文件夹内所有文件
                 aa.append(file_type)
     return aa
 def main():
-    os.chdir('D://YZYTool//fixed1')
+    os.chdir(r'E:\personal\daliy_code\temp\file_updat_check\test_file')
     aa = scan_file_list(".")
     print(aa)
 
