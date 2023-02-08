@@ -106,16 +106,15 @@ def update_file_mode(target_path,file_states_list):
         '''
     )
     if mode_id == "1":
-        print("选择1")
         pass
     elif mode_id == "2":
-        print("选择2")
         for file in file_states_list:
             if file[-1] == "移除":
                 print(file)
                 file_states_list.remove(file)
             else:
                 pass
+
     pretty_list(file_states_list,['文件名', '绝对路径', '相对路径','最近修改时间','状态'])
     update_files(target_path,file_states_list)
 
@@ -126,13 +125,14 @@ def folder_exists(target_path):
 
 ## 执行迁移操作
 def update_files(target_path,file_states_list):
+    print("开始更新...")
     for file in file_states_list:
         if file[-1]=="保持":
             pass
         elif file[-1]=="添加":
             #文件需要添加到的相对路径
             target_folder_path = (target_path+file[2])[:-len(file[0])]
-            print(target_folder_path)
+            #print(target_folder_path)
             # 判断文件夹是否存在，不存在则创建文件夹
             folder_exists(target_folder_path)
             # shutil.copy2 能够对文件进行复制，同时不会修改文件的修改时间等属性
@@ -149,11 +149,11 @@ def update_files(target_path,file_states_list):
 if __name__ == '__main__':
     #file_path = r"E:\personal\daliy_code\temp\file_updat_check\test_file\org\"
     
-    # org_path = input("请输入原文件夹地址:")
-    # target_path=input("请输入目标文件夹地址")
+    org_path = input("请输入原文件夹地址:")
+    target_path=input("请输入目标文件夹地址:")
 
-    org_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\org"
-    target_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\trans2"
+    #org_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\org"
+    #target_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\trans2"
 
     # 清洗地址
     org_path = clear_path(org_path)
