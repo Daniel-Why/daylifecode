@@ -86,7 +86,6 @@ def compare_files(org_file_list,target_file_list):
                 file_state = "变更"
             else:
                 file_state = "保持"
-            target_file_list.remove(t_file)
             break
         o_file.append(file_state)
     for t_file in target_file_list:
@@ -105,18 +104,19 @@ def update_file_mode(target_path,file_states_list):
             2.仅添加和更新文件，不删除多余文件
         '''
     )
+    update_file_list = file_states_list.copy()
     if mode_id == "1":
         pass
     elif mode_id == "2":
         for file in file_states_list:
             if file[-1] == "移除":
                 print(file)
-                file_states_list.remove(file)
+                update_file_list.remove(file)
             else:
                 pass
 
-    pretty_list(file_states_list,['文件名', '绝对路径', '相对路径','最近修改时间','状态'])
-    update_files(target_path,file_states_list)
+    pretty_list(update_file_list,['文件名', '绝对路径', '相对路径','最近修改时间','状态'])
+    update_files(target_path,update_file_list)
 
 ## 判断文件夹是否存在，不存在则创建文件夹
 def folder_exists(target_path):
@@ -127,7 +127,7 @@ def folder_exists(target_path):
 def update_files(target_path,file_states_list):
     print("开始更新...")
     for file in file_states_list:
-        if file[-1]=="保持":
+        if file[-1]=="保持":#不更新文件
             pass
         elif file[-1]=="添加":
             #文件需要添加到的相对路径
@@ -147,7 +147,6 @@ def update_files(target_path,file_states_list):
 
 # 主程序
 if __name__ == '__main__':
-    #file_path = r"E:\personal\daliy_code\temp\file_updat_check\test_file\org\"
     
     org_path = input("请输入原文件夹地址:")
     target_path=input("请输入目标文件夹地址:")
