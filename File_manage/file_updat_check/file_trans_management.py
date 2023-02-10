@@ -13,12 +13,27 @@ def clear_path(target_path):
         target_path = target_path[:-1]
     return target_path
 
-# 美化表格
+# 美化表格（废弃，太宽了）
 def pretty_list(table_list,table_title):
     table_target_file = PrettyTable(table_title)
     for fl in table_list:
         table_target_file.add_row(fl)
     print(table_target_file)
+
+# 展示数据
+def show_list(table_list,list_type):# file_list :['文件名', '绝对路径', '相对路径','最近修改时间']
+    n = 0
+    for i in table_list:
+        n += 1
+        if list_type == "file_state":#文件格式:file_state :['文件名', '绝对路径', '相对路径','最近修改时间','状态']
+            print("{} | {} | {} ".format(n,i[-1],i[1]))
+        elif list_type == "file_list":# file_list :['文件名', '绝对路径', '相对路径','最近修改时间']
+            print("{} | {} | {} ".format(n,i[0],i[1]))
+    print('''
+
+
+
+    ''')
 
 # 遍历指定目录下，文件夹的所有文件，并获取文件的创建、修改时间
 ## 提取文件的创建时间、修改时间
@@ -77,7 +92,7 @@ def files_path_list(target_path):
 def compare_files(org_file_list,target_file_list):
     for o_file in org_file_list:
         file_state = "添加"
-        for t_file in target_file_list:
+        for t_file in target_file_list.copy():
             try:
                 t_file.index(o_file[2])
             except:
@@ -86,6 +101,7 @@ def compare_files(org_file_list,target_file_list):
                 file_state = "变更"
             else:
                 file_state = "保持"
+            target_file_list.remove(t_file)
             break
         o_file.append(file_state)
     for t_file in target_file_list:
@@ -115,34 +131,44 @@ def update_file_mode(target_path,file_states_list):
             else:
                 pass
 
-    pretty_list(update_file_list,['文件名', '绝对路径', '相对路径','最近修改时间','状态'])
-    update_files(target_path,update_file_list)
+    return update_file_list
+    
 
 ## 判断文件夹是否存在，不存在则创建文件夹
 def folder_exists(target_path):
     if not os.path.exists(target_path):
         os.makedirs(target_path)
 
+
 ## 执行迁移操作
 def update_files(target_path,file_states_list):
     print("开始更新...")
+    file_count = len(file_states_list)
+    error_list = []
+    n = 0
     for file in file_states_list:
-        if file[-1]=="保持":#不更新文件
-            pass
-        elif file[-1]=="添加":
-            #文件需要添加到的相对路径
-            target_folder_path = (target_path+file[2])[:-len(file[0])]
-            #print(target_folder_path)
-            # 判断文件夹是否存在，不存在则创建文件夹
-            folder_exists(target_folder_path)
-            # shutil.copy2 能够对文件进行复制，同时不会修改文件的修改时间等属性
-            shutil.copy2(file[1],target_path+file[2])
-        elif file[-1]=="变更":
-            shutil.copy2(file[1],target_path+file[2])
-        elif file[-1]=="移除":
-            os.remove(target_path+file[2])
-        #file_states_list.remove(file)
-    print("完成更新")
+        try:
+            if file[-1]=="保持":#不更新文件
+                pass
+            elif file[-1]=="添加":
+                #文件需要添加到的相对路径
+                target_folder_path = (target_path+file[2])[:-len(file[0])]
+                #print(target_folder_path)
+                # 判断文件夹是否存在，不存在则创建文件夹
+                folder_exists(target_folder_path)
+                # shutil.copy2 能够对文件进行复制，同时不会修改文件的修改时间等属性
+                shutil.copy2(file[1],target_path+file[2])
+            elif file[-1]=="变更":
+                shutil.copy2(file[1],target_path+file[2])
+            elif file[-1]=="移除":
+                os.remove(target_path+file[2])
+        except:
+            error_list.append(file)
+        n += 1
+        print("进度：{:.2%}".format(n/file_count),end='\r')
+
+    print("\n完成更新")
+    return error_list
 
 
 # 主程序
@@ -162,13 +188,13 @@ if __name__ == '__main__':
     # 提取文件信息
     ## 源目录
     org_file_list = files_path_list(org_path)
-    print("源目录文件列表：")
-    pretty_list(org_file_list,['文件名', '绝对路径', '相对路径','最近修改时间'])
+    #print("#############源目录文件列表#############：")
+    #show_list(org_file_list,"file_list")
 
     ## 目标目录
     target_file_list = files_path_list(target_path)
-    print("目标目录文件列表：")
-    pretty_list(target_file_list,['文件名', '绝对路径', '相对路径','最近修改时间'])
+    #print("############目标目录文件列表###########：")
+    #show_list(target_file_list,"file_list")
 
 
 
@@ -176,10 +202,23 @@ if __name__ == '__main__':
     file_states_list = compare_files(org_file_list,target_file_list)
     
     # 显示文件变更状态表格
-    print("文件更新状态：")
-    pretty_list(file_states_list,['文件名', '绝对路径', '相对路径','最近修改时间','状态'])
+    print("############文件更新状态：############")
+    show_list(file_states_list,"file_state")
 
     
 
-    # 执行操作
-    update_file_mode(target_path,file_states_list)
+    # 选择模式，更新文档操作列表
+    update_file_list = update_file_mode(target_path,file_states_list)
+    print("############以下文件将进行更新：############")
+    show_list(update_file_list,"file_state")
+
+
+    operate_id = input("是否开始更新y/n:")
+    if operate_id == "y":
+        # 执行操作
+        error_list = update_files(target_path,update_file_list)
+    else:
+        print("结束脚本")
+
+    print("\n############以下文件更新失败：############")
+    show_list(error_list,"file_state")
