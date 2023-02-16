@@ -171,14 +171,26 @@ def update_files(target_path,file_states_list):
     return error_list
 
 
-# 主程序
-if __name__ == '__main__':
-    
-    org_path = input("请输入原文件夹地址:")
-    target_path=input("请输入目标文件夹地址:")
+# 删除目标目录中的空文件夹
+def remove_empty_folder(target_path):
+    target_path=clear_path(target_path)
+    for root,dirs,files in os.walk(target_path,topdown=False):
+        #print(root)# 查询的根目录
+        #print(dirs)# 根目录中的文件夹
+        #print(files)# 根目录中的文件
+        try:
+            if not os.listdir(root):# 非空为真，如果不为空则...
+                #print('{} 是一个空文件夹'.format(root))
+                os.removedirs(root)
+                print('{} 已删除'.format(root))
+        except:
+            pass
 
-    #org_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\org"
-    #target_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\trans2"
+    print("\n删除完成")
+
+
+# Main Process
+def update_file_process(org_path,target_path):
 
     # 清洗地址
     org_path = clear_path(org_path)
@@ -196,29 +208,58 @@ if __name__ == '__main__':
     #print("############目标目录文件列表###########：")
     #show_list(target_file_list,"file_list")
 
-
-
     # 比较原始文件夹和目标文件夹中的文件，列出文件更新状态
     file_states_list = compare_files(org_file_list,target_file_list)
-    
+
     # 显示文件变更状态表格
     print("############文件更新状态：############")
     show_list(file_states_list,"file_state")
 
-    
 
     # 选择模式，更新文档操作列表
     update_file_list = update_file_mode(target_path,file_states_list)
     print("############以下文件将进行更新：############")
+
+
     show_list(update_file_list,"file_state")
-
-
     operate_id = input("是否开始更新y/n:")
     if operate_id == "y":
-        # 执行操作
+        # 更新文件
         error_list = update_files(target_path,update_file_list)
+        print("\n############以下文件更新失败：############")
+        show_list(error_list,"file_state")
+        # 删除目标目录中的空文件夹
+        operate_id = input("是否删除目标目录中的所有空文件夹y/n:")
+        if operate_id == "y":
+            # 执行操作
+            remove_empty_folder(target_path)
+        else:
+            print("结束脚本")
+            # 执行操作     
     else:
         print("结束脚本")
 
-    print("\n############以下文件更新失败：############")
-    show_list(error_list,"file_state")
+
+
+# 主程序
+if __name__ == '__main__':
+    #样例地址：
+    #org_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\org"
+    #target_path = r"E:\personal\daliy_code\daylifecode\File_manage\file_updat_check\test_file\trans2"
+
+    operate_id = input('''
+    请选择模式（按任意键结束脚本）:
+        1. 备份文件模式
+        2. 清空空文件夹模式
+        ''')
+    if operate_id == "1":
+        org_path = input("请输入原文件夹地址:")
+        target_path=input("请输入目标文件夹地址:")
+        # 执行操作
+        update_file_process(org_path,target_path)
+    elif operate_id == "2":
+        target_path=input("请输入目标文件夹地址:")
+        remove_empty_folder(target_path)
+    else:
+        print("结束脚本")
+    
