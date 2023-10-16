@@ -1,7 +1,7 @@
 import socket
 s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 # 绑定端口
-s.bind(('127.0.0.1',8888))
+s.bind(('192.168.88.232',8888))
 print('Bind UDP on 8888')
 while True:
     # 接收数据
