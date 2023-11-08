@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>设置Cookie</title>
+    <script>
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            var cookieArr = document.cookie.split(";");
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        function handleRequest() {
+            // 假设这里发送了一个请求，并成功获取到了cookie
+            var returnedCookie = "username=JohnDoe";
+
+            // 使用setCookie函数设置cookie
+            setCookie("username", returnedCookie, 7);
+
+            // 使用getCookie函数获取cookie的值
+            var cookieValue = getCookie("username");
+            if (cookieValue) {
+                alert("设置的cookie值为：" + cookieValue);
+            } else {
+                alert("未找到对应的cookie值");
+            }
+        }
+    </script>
+</head>
+<body onload="handleRequest()">
+</body>
+</html>
