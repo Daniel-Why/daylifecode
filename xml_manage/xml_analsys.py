@@ -478,15 +478,25 @@ for util in root.findall('utils/util'):
     at_front_value = util.find('atFront')
     remoteServer = util.find('remoteServer')  
 
-    # 检查 <individual>false且<atFront>true 的情况
-    if individual_value.text == 'false' and at_front_value is not None and at_front_value.text == 'true':
-        cname_value = util.find('cname').text
-        print('cname:', cname_value)
 
-    # 检查 <individual>true 且没有 <remoteServer>true 的情况
-    elif individual_value.text == 'true' and remoteServer  is None:
-        cname_value = util.find('cname').text
-        print('cname:', cname_value)
+
+    cname_value = util.find('cname').text
+    print('cname:', cname_value)
+    group_value = util.find('group')
+    if group_value is not None:
+        group_value = util.find('group').text
+        print('group:', group_value)
+    else:
+        print('group:None')
+#    # 检查 <individual>false且<atFront>true 的情况
+#    if individual_value.text == 'false' and at_front_value is not None and at_front_value.text == 'true':
+#        cname_value = util.find('cname').text
+#        print('cname:', cname_value)
+#
+#    # 检查 <individual>true 且没有 <remoteServer>true 的情况
+#    elif individual_value.text == 'true' and remoteServer  is None:
+#        cname_value = util.find('cname').text
+#        print('cname:', cname_value)
 
     # 检查 <individual>false且没有<atFront> 的情况
     #if individual_value.text == 'false' and at_front_value is None :
