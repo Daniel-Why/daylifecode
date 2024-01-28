@@ -1,4 +1,4 @@
-from flask import Flask, make_response,request
+from flask import Flask, make_response,request,jsonify
 import urllib.parse
 from socketserver import ThreadingMixIn, TCPServer
 import threading
@@ -18,6 +18,34 @@ def index():
     print("Decoded path:", decoded_path)
 
     return response
+
+@app.route('/post', methods=['POST'])
+def post_test():
+    para1 = request.form.get('p1')
+    para2 = request.form.get('p2')
+    print('{},{}'.format(para1,para2))
+    response = {
+        'status': 'success',
+        'message': '数据处理成功',
+        'param1':para1,
+        'param2':para2
+    }
+    return jsonify(response)
+
+@app.route('/get')
+def get_test():
+    arg1 = request.args.get('p1')
+    arg2 = request.args.get('p2')
+    print('{},{}'.format(arg1,arg2))
+    response = {
+        'status': 'success',
+        'message': '数据处理成功',
+        'arg1':arg1,
+        'arg2':arg2
+    }
+    return jsonify(response)
+
+
 
 class ThreadedTCPServer(ThreadingMixIn, TCPServer):
     pass
@@ -44,4 +72,4 @@ def not_found(error):
     
 
 if __name__ == '__main__':
-    app.run(host='192.168.88.232',port=5000)
+    app.run(host='127.0.0.1',port=5000,debug=True)
