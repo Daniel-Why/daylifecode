@@ -1,22 +1,30 @@
-from flask import Flask, make_response,request,jsonify
+from flask import Flask, make_response,request,jsonify,render_template
 import urllib.parse
 from socketserver import ThreadingMixIn, TCPServer
 import threading
 import socket
 
-
+from flask import Flask, make_response, request
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     response = make_response("Azzk aikx 189098")
-    response.set_cookie('my_cookie', 'cookie_value')
+    response.set_cookie('my_cookie', 'cookie_value',max_age=3600)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
     url_path = request.path
     decoded_path = urllib.parse.unquote(url_path)
     print("Request path:", url_path)
     print("Decoded path:", decoded_path)
 
+    return response
+
+@app.route('/cookie_test')
+def cookie_test():
+    if 'my_cookie' in request.cookies and request.cookies['my_cookie'] == 'cookie_value':
+        response = "Hello world"
+    else:
+        response = "cookie error"
     return response
 
 @app.route('/post', methods=['POST'])
@@ -56,6 +64,11 @@ def tcp_path():
     print("Your IP address is: {}".format(ip_address))
     return "Hello World!"
 
+@app.route('/example')
+def example():
+    name = "World"
+    # 将变量传入模板
+    return render_template('example.html', name=name)
 
 @app.errorhandler(404)
 def not_found(error):
