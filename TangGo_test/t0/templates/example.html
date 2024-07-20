@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,18 @@
         }
     </style>
     <title>页面标题</title>
+    <script src="{{ url_for('static',filename='js/example.js') }}"></script>
 </head>
 <body>
     <!-- 这是一个紫色的 h1 标签 -->
     <h1>😄 Hello, {{ name }}!🎉</h1>
-    <!-- 其他页面内容... -->
+    <p id="js0">等待载入中...</p>
+    <p id="js1">等待载入飞行员。</p>
+    <button id="loadpilot" type="button" onclick="myFunction()">载入飞行员</button>
+    <!-- myFunction 保存在名为 "example.js" 的外部文件中。 -->
+    <button id="sendRequest">Send POST Request</button>
+    <!-- 发送post请求 -->
+
 </body>
+
 </html>

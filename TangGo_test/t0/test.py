@@ -1,16 +1,21 @@
 from flask import Flask, make_response,request,jsonify,render_template
 import urllib.parse
 from socketserver import ThreadingMixIn, TCPServer
-import threading
-import socket
+from flask_socketio import SocketIO, emit
 
 from flask import Flask, make_response, request
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your_secret_key'
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/')
 def index():
-    response = make_response("Azzk aikx 189098")
-    response.set_cookie('my_cookie', 'cookie_value',max_age=3600)
+    response_text='''
+    apple
+    "Azzk aikx 189098"
+'''
+    response = make_response(response_text)
+    response.set_cookie('my_cookie', 'cookie_value',max_age=10)
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
     url_path = request.path
     decoded_path = urllib.parse.unquote(url_path)
@@ -64,11 +69,16 @@ def tcp_path():
     print("Your IP address is: {}".format(ip_address))
     return "Hello World!"
 
-@app.route('/example')
-def example():
+@app.route('/example/world')
+def example_world():
     name = "World"
     # 将变量传入模板
     return render_template('example.html', name=name)
+
+@app.route('/example/<username>/')
+def example_banana(username):
+    # 将变量传入模板
+    return render_template('example.html', name=username)
 
 @app.errorhandler(404)
 def not_found(error):
@@ -82,7 +92,18 @@ def not_found(error):
     print("request:",request.get_data())
 
     return 'No No No i am not Dianna', 404
+
+@socketio.on('connect')
+def on_connect():
+    print("Client connected")
+
+@socketio.on('message')
+def on_message(data):
+    print(f"Received message: {data}")
+    # 假设我们回应客户端发送的消息
+    emit('response', f"You said: {data}")
     
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1',port=5000,debug=True)
+    app.run(host='192.168.3.130',port=999,debug=True)
+    #socketio.run(app, host='127.0.0.1', port=5000, debug=True)
